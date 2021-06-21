@@ -2302,37 +2302,19 @@ var Bootstrap4DisclosureMenuToggle = /*#__PURE__*/function (_DisclosureMenuToggl
   }, {
     key: "expand",
     value: function expand() {
-      var _this2 = this;
-
       var emit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var _this$elements$contro = this.elements.controlledMenu,
           closeClass = _this$elements$contro.closeClass,
           openClass = _this$elements$contro.openClass;
-      this.dom.toggle.setAttribute("aria-expanded", "true");
-      this.elements.controlledMenu.dom.container.classList.add("collapsing");
-      setTimeout(function () {
-        _this2.elements.controlledMenu.dom.container.classList.remove("collapsing");
-      }, 250); // Add the open class
+      this.dom.toggle.setAttribute("aria-expanded", "true"); // Add the open class
 
       if (openClass !== "") {
-        if (typeof openClass === "string") {
-          this.elements.controlledMenu.dom.container.classList.add(openClass);
-        } else if (Array.isArray(openClass)) {
-          openClass.forEach(function (value) {
-            _this2.elements.controlledMenu.dom.container.classList.add(value);
-          });
-        }
+        this.elements.controlledMenu.dom.container.classList.add(openClass);
       } // Remove the close class.
 
 
       if (closeClass !== "") {
-        if (typeof closeClass === "string") {
-          this.elements.controlledMenu.dom.container.classList.remove(closeClass);
-        } else if (Array.isArray(closeClass)) {
-          closeClass.forEach(function (value) {
-            _this2.elements.controlledMenu.dom.container.classList.remove(value);
-          });
-        }
+        this.elements.controlledMenu.dom.container.classList.remove(closeClass);
       }
 
       if (emit) {
@@ -2350,37 +2332,19 @@ var Bootstrap4DisclosureMenuToggle = /*#__PURE__*/function (_DisclosureMenuToggl
   }, {
     key: "collapse",
     value: function collapse() {
-      var _this3 = this;
-
       var emit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var _this$elements$contro2 = this.elements.controlledMenu,
           closeClass = _this$elements$contro2.closeClass,
           openClass = _this$elements$contro2.openClass;
-      this.dom.toggle.setAttribute("aria-expanded", "false");
-      this.elements.controlledMenu.dom.container.classList.add("collapsing");
-      setTimeout(function () {
-        _this3.elements.controlledMenu.dom.container.classList.remove("collapsing");
-      }, 250); // Add the close class
+      this.dom.toggle.setAttribute("aria-expanded", "false"); // Add the close class
 
       if (closeClass !== "") {
-        if (typeof closeClass === "string") {
-          this.elements.controlledMenu.dom.container.classList.add(closeClass);
-        } else if (Array.isArray(closeClass)) {
-          closeClass.forEach(function (value) {
-            _this3.elements.controlledMenu.dom.container.classList.add(value);
-          });
-        }
+        this.elements.controlledMenu.dom.container.classList.add(closeClass);
       } // Remove the open class.
 
 
       if (openClass !== "") {
-        if (typeof openClass === "string") {
-          this.elements.controlledMenu.dom.container.classList.remove(openClass);
-        } else if (Array.isArray(openClass)) {
-          openClass.forEach(function (value) {
-            _this3.elements.controlledMenu.dom.container.classList.remove(value);
-          });
-        }
+        this.elements.controlledMenu.dom.container.classList.remove(openClass);
       }
 
       if (emit) {
