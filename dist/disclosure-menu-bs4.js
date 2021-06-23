@@ -353,7 +353,6 @@ var Bootstrap4DisclosureMenu = (function () {
           toggle: this
         }
       });
-      this.initialize();
     }
     /**
      * Initialize the toggle by ensuring WAI-ARIA values are set,
@@ -468,10 +467,8 @@ var Bootstrap4DisclosureMenu = (function () {
       if (openClass !== "") {
         if (typeof openClass === "string") {
           this.elements.controlledMenu.dom.menu.classList.add(openClass);
-        } else if (Array.isArray(openClass)) {
-          openClass.forEach(value => {
-            this.elements.controlledMenu.dom.menu.classList.add(value);
-          });
+        } else {
+          this.elements.controlledMenu.dom.menu.classList.add(...openClass);
         }
       } // Remove the close class.
 
@@ -479,10 +476,8 @@ var Bootstrap4DisclosureMenu = (function () {
       if (closeClass !== "") {
         if (typeof closeClass === "string") {
           this.elements.controlledMenu.dom.menu.classList.remove(closeClass);
-        } else if (Array.isArray(closeClass)) {
-          closeClass.forEach(value => {
-            this.elements.controlledMenu.dom.menu.classList.remove(value);
-          });
+        } else {
+          this.elements.controlledMenu.dom.menu.classList.remove(...closeClass);
         }
       }
 
@@ -509,10 +504,8 @@ var Bootstrap4DisclosureMenu = (function () {
       if (closeClass !== "") {
         if (typeof closeClass === "string") {
           this.elements.controlledMenu.dom.menu.classList.add(closeClass);
-        } else if (Array.isArray(closeClass)) {
-          closeClass.forEach(value => {
-            this.elements.controlledMenu.dom.menu.classList.add(value);
-          });
+        } else {
+          this.elements.controlledMenu.dom.menu.classList.add(...closeClass);
         }
       } // Remove the open class.
 
@@ -520,10 +513,8 @@ var Bootstrap4DisclosureMenu = (function () {
       if (openClass !== "") {
         if (typeof openClass === "string") {
           this.elements.controlledMenu.dom.menu.classList.remove(openClass);
-        } else if (Array.isArray(openClass)) {
-          openClass.forEach(value => {
-            this.elements.controlledMenu.dom.menu.classList.remove(value);
-          });
+        } else {
+          this.elements.controlledMenu.dom.menu.classList.remove(...openClass);
         }
       }
 
@@ -2204,6 +2195,18 @@ var Bootstrap4DisclosureMenu = (function () {
 
   function _typeof$1(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof$1 = function _typeof(obj) { return typeof obj; }; } else { _typeof$1 = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof$1(obj); }
 
+  function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+  function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+  function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+  function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+  function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+  function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
   function _classCallCheck$1(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2265,7 +2268,10 @@ var Bootstrap4DisclosureMenu = (function () {
         controlledMenu: controlledMenu,
         parentMenu: parentMenu,
         initialize: false
-      });
+      }); // Set the container for the toggle.
+      // This differs based on if the menu is top-level or not.
+
+      _this.domElements.container = controlledMenu.isTopLevel ? controlledMenu.dom.container : controlledMenu.dom.menu;
 
       if (initialize) {
         _this.initialize();
@@ -2284,7 +2290,7 @@ var Bootstrap4DisclosureMenu = (function () {
       value: function initialize() {
         _get(_getPrototypeOf$1(Bootstrap4DisclosureMenuToggle.prototype), "initialize", this).call(this);
 
-        this.elements.controlledMenu.dom.container.classList.add("collapse");
+        this.dom.container.classList.add("collapse");
 
         if (this.dom.toggle.hasAttribute("data-toggle")) {
           this.dom.toggle.removeAttribute("data-toggle");
@@ -2312,12 +2318,24 @@ var Bootstrap4DisclosureMenu = (function () {
         this.dom.toggle.setAttribute("aria-expanded", "true"); // Add the open class
 
         if (openClass !== "") {
-          this.elements.controlledMenu.dom.container.classList.add(openClass);
+          if (typeof openClass === "string") {
+            this.dom.container.classList.add(openClass);
+          } else {
+            var _this$dom$container$c;
+
+            (_this$dom$container$c = this.dom.container.classList).add.apply(_this$dom$container$c, _toConsumableArray(openClass));
+          }
         } // Remove the close class.
 
 
         if (closeClass !== "") {
-          this.elements.controlledMenu.dom.container.classList.remove(closeClass);
+          if (typeof closeClass === "string") {
+            this.dom.container.classList.remove(closeClass);
+          } else {
+            var _this$dom$container$c2;
+
+            (_this$dom$container$c2 = this.dom.container.classList).remove.apply(_this$dom$container$c2, _toConsumableArray(closeClass));
+          }
         }
 
         if (emit) {
@@ -2342,12 +2360,24 @@ var Bootstrap4DisclosureMenu = (function () {
         this.dom.toggle.setAttribute("aria-expanded", "false"); // Add the close class
 
         if (closeClass !== "") {
-          this.elements.controlledMenu.dom.container.classList.add(closeClass);
+          if (typeof closeClass === "string") {
+            this.dom.container.classList.add(closeClass);
+          } else {
+            var _this$dom$container$c3;
+
+            (_this$dom$container$c3 = this.dom.container.classList).add.apply(_this$dom$container$c3, _toConsumableArray(closeClass));
+          }
         } // Remove the open class.
 
 
         if (openClass !== "") {
-          this.elements.controlledMenu.dom.container.classList.remove(openClass);
+          if (typeof openClass === "string") {
+            this.dom.container.classList.remove(openClass);
+          } else {
+            var _this$dom$container$c4;
+
+            (_this$dom$container$c4 = this.dom.container.classList).remove.apply(_this$dom$container$c4, _toConsumableArray(openClass));
+          }
         }
 
         if (emit) {

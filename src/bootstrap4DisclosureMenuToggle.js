@@ -31,6 +31,12 @@ class Bootstrap4DisclosureMenuToggle extends DisclosureMenuToggle {
       initialize: false,
     });
 
+    // Set the container for the toggle.
+    // This differs based on if the menu is top-level or not.
+    this.domElements.container = controlledMenu.isTopLevel
+      ? controlledMenu.dom.container
+      : controlledMenu.dom.menu;
+
     if (initialize) {
       this.initialize();
     }
@@ -43,7 +49,7 @@ class Bootstrap4DisclosureMenuToggle extends DisclosureMenuToggle {
   initialize() {
     super.initialize();
 
-    this.elements.controlledMenu.dom.container.classList.add("collapse");
+    this.dom.container.classList.add("collapse");
 
     if (this.dom.toggle.hasAttribute("data-toggle")) {
       this.dom.toggle.removeAttribute("data-toggle");
@@ -68,12 +74,20 @@ class Bootstrap4DisclosureMenuToggle extends DisclosureMenuToggle {
 
     // Add the open class
     if (openClass !== "") {
-      this.elements.controlledMenu.dom.container.classList.add(openClass);
+      if (typeof openClass === "string") {
+        this.dom.container.classList.add(openClass);
+      } else {
+        this.dom.container.classList.add(...openClass);
+      }
     }
 
     // Remove the close class.
     if (closeClass !== "") {
-      this.elements.controlledMenu.dom.container.classList.remove(closeClass);
+      if (typeof closeClass === "string") {
+        this.dom.container.classList.remove(closeClass);
+      } else {
+        this.dom.container.classList.remove(...closeClass);
+      }
     }
 
     if (emit) {
@@ -95,12 +109,20 @@ class Bootstrap4DisclosureMenuToggle extends DisclosureMenuToggle {
 
     // Add the close class
     if (closeClass !== "") {
-      this.elements.controlledMenu.dom.container.classList.add(closeClass);
+      if (typeof closeClass === "string") {
+        this.dom.container.classList.add(closeClass);
+      } else {
+        this.dom.container.classList.add(...closeClass);
+      }
     }
 
     // Remove the open class.
     if (openClass !== "") {
-      this.elements.controlledMenu.dom.container.classList.remove(openClass);
+      if (typeof openClass === "string") {
+        this.dom.container.classList.remove(openClass);
+      } else {
+        this.dom.container.classList.remove(...openClass);
+      }
     }
 
     if (emit) {
