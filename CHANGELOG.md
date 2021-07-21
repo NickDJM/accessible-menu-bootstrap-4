@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-alpha.2](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-07-21)
+
+
+### Features
+
+* add Menubar ([7352adb](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/7352adbeccd9f498b5c95bc6d01a793abf258b70))
+* add Treeview menus ([d29abea](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/d29abeaa9079c593e8be77be2511b3d85435f326))
+
+
+### Build System
+
+* **npm:** add keywords and update dependencies ([e3e184f](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/e3e184f7a2cb2cd50fed344372e50dd3666aa6dc))
+
 ## [1.0.0-alpha.1](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2021-06-23)
 
 
