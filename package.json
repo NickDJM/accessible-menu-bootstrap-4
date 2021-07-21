@@ -3,6 +3,11 @@
   "version": "1.0.0-alpha.1",
   "description": "A JavaScript library to help you generate WAI-ARIA accessible menus with in the DOM using Bootstrap 4.",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "dist/",
+    "src/"
+  ],
   "scripts": {
     "prepare": "husky install",
     "commit": "git-cz",
@@ -17,6 +22,19 @@
     "type": "git",
     "url": "git+https://github.com/NickDJM/accessible-menu-bootstrap-4.git"
   },
+  "keywords": [
+    "menu",
+    "accessible",
+    "accessibility",
+    "wai-aria",
+    "aria",
+    "a11y",
+    "nav",
+    "navigation",
+    "menubar",
+    "disclosure menu",
+    "treeview"
+  ],
   "author": "Nick Milton",
   "license": "ISC",
   "bugs": {
@@ -24,7 +42,7 @@
   },
   "homepage": "https://github.com/NickDJM/accessible-menu-bootstrap-4#readme",
   "dependencies": {
-    "accessible-menu": "^3.0.0-alpha.1"
+    "accessible-menu": "^3.0.0-alpha.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
