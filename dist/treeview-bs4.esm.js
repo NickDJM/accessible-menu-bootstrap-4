@@ -1910,23 +1910,23 @@ class BaseMenu {
 
 /* eslint-disable jsdoc/no-undefined-types */
 /**
- * A basic navigation link contained inside of a {@link DisclousreMenu}.
+ * A basic navigation link contained inside of a {@link Treeview}.
  *
  * @extends BaseMenuItem
  */
 
-class DisclosureMenuItem extends BaseMenuItem {
+class TreeviewItem extends BaseMenuItem {
   /**
    * @inheritdoc
    *
-   * @param {object}                    options                         - The options for generating the menu item.
-   * @param {HTMLElement}               options.menuItemElement         - The menu item in the DOM.
-   * @param {HTMLElement}               options.menuLinkElement         - The menu item's link in the DOM.
-   * @param {DisclosureMenu}            options.parentMenu              - The parent menu.
-   * @param {boolean}                   [options.isSubmenuItem = false] - A flag to mark if the menu item is controlling a submenu.
-   * @param {DisclosureMenu|null}       [options.childMenu = null]      - The child menu.
-   * @param {DisclosureMenuToggle|null} [options.toggle = null]         - The controller for the child menu.
-   * @param {boolean}                   [options.initialize = true]     - A flag to initialize the menu item immediately upon creation.
+   * @param {object}              options                         - The options for generating the menu item.
+   * @param {HTMLElement}         options.menuItemElement         - The menu item in the DOM.
+   * @param {HTMLElement}         options.menuLinkElement         - The menu item's link in the DOM.
+   * @param {Treeview}            options.parentMenu              - The parent menu.
+   * @param {boolean}             [options.isSubmenuItem = false] - A flag to mark if the menu item is controlling a submenu.
+   * @param {Treeview|null}       [options.childMenu = null]      - The child menu.
+   * @param {TreeviewToggle|null} [options.toggle = null]         - The controller for the child menu.
+   * @param {boolean}             [options.initialize = true]     - A flag to initialize the menu item immediately upon creation.
    */
   constructor({
     menuItemElement,
@@ -1950,26 +1950,68 @@ class DisclosureMenuItem extends BaseMenuItem {
       this.initialize();
     }
   }
+  /**
+   * Initialize the menu item.
+   *
+   * Initialize will call the {@link BaseMenuItem#initialize|BaseMenuItem's initialize method}
+   * as well as set the menu item's `role` to "none",
+   * the menu link's `role` to "treeitem", and
+   * the menu link's `tabIndex` to -1 in the DOM.
+   */
+
+
+  initialize() {
+    super.initialize();
+    this.dom.item.setAttribute("role", "none");
+    this.dom.link.setAttribute("role", "treeitem");
+    this.dom.link.tabIndex = -1;
+  }
+  /**
+   * Focuses the menu item's link if the parent menu's
+   * {@link Menubar#shouldFocus|shouldFocus} value is `true`.
+   *
+   * This will call the {@link BaseMenuItem#focus|BaseMenuItem's focus method}
+   * as well as set the menu link's `tabIndex` to 0.
+   */
+
+
+  focus() {
+    super.focus();
+    this.dom.link.tabIndex = 0;
+  }
+  /**
+   * Blurs the menu item's link if the parent menu's
+   * {@link Menubar#shouldFocus|shouldFocus} value is `true`.
+   *
+   * This will call the {@link BaseMenuItem#blur|BaseMenuItem's blur method}
+   * as well as set the menu link's `tabIndex` to -1.
+   */
+
+
+  blur() {
+    super.blur();
+    this.dom.link.tabIndex = -1;
+  }
 
 }
 
 /* eslint-disable jsdoc/no-undefined-types */
 /**
- * A link or button that controls the visibility of a {@link DisclousreMenu}.
+ * A link or button that controls the visibility of a {@link Treeview}.
  *
  * @extends BaseMenuToggle
  */
 
-class DisclosureMenuToggle extends BaseMenuToggle {
+class TreeviewToggle extends BaseMenuToggle {
   /**
    * @inheritdoc
    *
-   * @param {object}              options                     - The options for generating the menu toggle.
-   * @param {HTMLElement}         options.menuToggleElement   - The toggle element in the DOM.
-   * @param {HTMLElement}         options.parentElement       - The element containing the controlled menu.
-   * @param {DisclosureMenu}      options.controlledMenu      - The menu controlled by this toggle.
-   * @param {DisclosureMenu|null} [options.parentMenu = null] - The menu containing this toggle.
-   * @param {boolean}             [options.initialize = true] - A flag to initialize the menu toggle immediately upon creation.
+   * @param {object}                  options                     - The options for generating the menu toggle.
+   * @param {HTMLElement}             options.menuToggleElement   - The toggle element in the DOM.
+   * @param {HTMLElement}             options.parentElement       - The element containing the controlled menu.
+   * @param {TreeviewNavigation}      options.controlledMenu      - The menu controlled by this toggle.
+   * @param {TreeviewNavigation|null} [options.parentMenu = null] - The menu containing this toggle.
+   * @param {boolean}                 [options.initialize = true] - A flag to initialize the menu toggle immediately upon creation.
    */
   constructor({
     menuToggleElement,
@@ -1989,80 +2031,37 @@ class DisclosureMenuToggle extends BaseMenuToggle {
       this.initialize();
     }
   }
-  /**
-   * Opens the controlled menu.
-   *
-   * Calls the {@link DisclosureMenuToggle#closeSiblings| closeSiblings method}
-   * and _then_ {@link BaseMenuToggle#open|BaseMenuToggle's open method}.
-   */
-
-
-  open() {
-    // Close all siblings.
-    this.closeSiblings();
-    super.open();
-  }
-  /**
-   * Opens the controlled menu without the current focus entering it.
-   *
-   * Calls the {@link DisclosureMenuToggle#closeSiblings| closeSiblings method}
-   * and _then_ {@link BaseMenuToggle#preview|BaseMenuToggle's preview method}.
-   */
-
-
-  preview() {
-    // Close all siblings.
-    this.closeSiblings();
-    super.preview();
-  }
-  /**
-   * Closes the controlled menu.
-   *
-   * Calls the {@link DisclosureMenuToggle#closeChildren| closeChildren method}
-   * and _then_ {@link BaseMenuToggle#close|BaseMenuToggle's close method}.
-   */
-
-
-  close() {
-    if (this.isOpen) {
-      // Close all children.
-      this.closeChildren();
-    }
-
-    super.close();
-  }
 
 }
 
 /**
- * An accessible disclosure menu in the DOM.
+ * An accessible treeview navigation in the DOM.
  *
- * See {@link https://www.w3.org/TR/wai-aria-practices-1.2/examples/disclosure/disclosure-navigation.html|Example Disclosure for Navigation Menus}
+ * See {@link https://www.w3.org/TR/wai-aria-practices-1.2/examples/treeview/treeview-2/treeview-2a.html|Navigation Treeview Example Using Computed Properties}
  *
  * @extends BaseMenu
  */
 
-class DisclosureMenu extends BaseMenu {
+class Treeview extends BaseMenu {
   /**
    * @inheritdoc
    *
-   * @param {object}                 options                              - The options for generating the menu.
-   * @param {HTMLElement}            options.menuElement                  - The menu element in the DOM.
-   * @param {string}                 [options.menuItemSelector = li]      - The CSS selector string for menu items.
-   * @param {string}                 [options.menuLinkSelector = a]       - The CSS selector string for menu links.
-   * @param {string}                 [options.submenuItemSelector]        - The CSS selector string for menu items containing submenus.
-   * @param {string}                 [options.submenuToggleSelector = a]  - The CSS selector string for submenu toggle buttons/links.
-   * @param {string}                 [options.submenuSelector = ul]       - The CSS selector string for submenus.
-   * @param {(HTMLElement|null)}     [options.controllerElement = null]   - The element controlling the menu in the DOM.
-   * @param {(HTMLElement|null)}     [options.containerElement = null]    - The element containing the menu in the DOM.
-   * @param {(string|string[]|null)} [options.openClass = show]           - The class to apply when a menu is "open".
-   * @param {(string|string[]|null)} [options.closeClass = hide]          - The class to apply when a menu is "closed".
-   * @param {boolean}                [options.isTopLevel = false]         - A flag to mark the root menu.
-   * @param {(DisclosureMenu|null)}  [options.parentMenu = null]          - The parent menu to this menu.
-   * @param {string}                 [options.hoverType = off]            - The type of hoverability a menu has.
-   * @param {number}                 [options.hoverDelay = 250]           - The delay for closing menus if the menu is hoverable (in miliseconds).
-   * @param {boolean}                [options.optionalKeySupport = false] - A flag to add optional keyboard support (Arrow keys, Home, and End) to the menu.
-   * @param {boolean}                [options.initialize = true]          - A flag to initialize the menu immediately upon creation.
+   * @param {object}                 options                             - The options for generating the menu.
+   * @param {HTMLElement}            options.menuElement                 - The menu element in the DOM.
+   * @param {string}                 [options.menuItemSelector = li]     - The CSS selector string for menu items.
+   * @param {string}                 [options.menuLinkSelector = a]      - The CSS selector string for menu links.
+   * @param {string}                 [options.submenuItemSelector]       - The CSS selector string for menu items containing submenus.
+   * @param {string}                 [options.submenuToggleSelector = a] - The CSS selector string for submenu toggle buttons/links.
+   * @param {string}                 [options.submenuSelector = ul]      - The CSS selector string for submenus.
+   * @param {(HTMLElement|null)}     [options.controllerElement = null]  - The element controlling the menu in the DOM.
+   * @param {(HTMLElement|null)}     [options.containerElement = null]   - The element containing the menu in the DOM.
+   * @param {(string|string[]|null)} [options.openClass = show]          - The class to apply when a menu is "open".
+   * @param {(string|string[]|null)} [options.closeClass = hide]         - The class to apply when a menu is "closed".
+   * @param {boolean}                [options.isTopLevel = false]        - A flag to mark the root menu.
+   * @param {(Treeview|null)}        [options.parentMenu = null]         - The parent menu to this menu.
+   * @param {string}                 [options.hoverType = off]           - The type of hoverability a menu has.
+   * @param {number}                 [options.hoverDelay = 250]          - The delay for closing menus if the menu is hoverable (in miliseconds).
+   * @param {boolean}                [options.initialize = true]         - A flag to initialize the menu immediately upon creation.
    */
   constructor({
     menuElement,
@@ -2079,7 +2078,6 @@ class DisclosureMenu extends BaseMenu {
     parentMenu = null,
     hoverType = "off",
     hoverDelay = 250,
-    optionalKeySupport = false,
     initialize = true
   }) {
     super({
@@ -2099,45 +2097,28 @@ class DisclosureMenu extends BaseMenu {
       hoverDelay
     }); // Set default class types.
 
-    this.MenuType = DisclosureMenu;
-    this.MenuItemType = DisclosureMenuItem;
-    this.MenuToggleType = DisclosureMenuToggle;
-    this.currentChild = -1;
-    this.optionalKeySupport = optionalKeySupport;
+    this.MenuType = Treeview;
+    this.MenuItemType = TreeviewItem;
+    this.MenuToggleType = TreeviewToggle;
 
     if (initialize) {
       this.initialize();
     }
   }
   /**
-   * A flag to add optional keyboard support (Arrow keys, "Home", and "End") to the menu.
-   *
-   * This functions differently for root vs. submenus.
-   * Submenus will always inherit their root menu's optionalKeySupport.
-   *
-   * @type {boolean}
-   */
-
-
-  get optionalKeySupport() {
-    return this.isTopLevel ? this.optionalSupport : this.elements.rootMenu.optionalKeySupport;
-  }
-
-  set optionalKeySupport(value) {
-    isValidType("boolean", {
-      optionalKeySupport: value
-    });
-    this.optionalSupport = value;
-  }
-  /**
    * Initializes the menu.
    *
    * Initialize will call the {@link BaseMenu#initialize|BaseMenu's initialize method}
-   * as well as set up {@link DisclosureMenu#handleFocus|focus},
-   * {@link DisclosureMenu#handleClick|click},
-   * {@link DisclosureMenu#handleHover|hover},
-   * {@link DisclosureMenu#handleKeydown|keydown}, and
-   * {@link DisclosureMenu#handleKeyup|keyup} events for the menu.
+   * as well as set up {@link Treeview#handleFocus|focus},
+   * {@link Treeview#handleClick|click},
+   * {@link Treeview#handleHover|hover},
+   * {@link Treeview#handleKeydown|keydown}, and
+   * {@link Treeview#handleKeyup|keyup} events for the menu.
+   *
+   * If the menu is a root menu it's `role` will be set to "tree" and the first
+   * menu item's `tabIndex` will be set to 0 in the DOM.
+   *
+   * If the menu is _not_ a root menu it's `role` will be set to "group".
    *
    * If the BaseMenu's initialize method throws an error,
    * this will catch it and log it to the console.
@@ -2147,6 +2128,14 @@ class DisclosureMenu extends BaseMenu {
   initialize() {
     try {
       super.initialize();
+
+      if (this.isTopLevel) {
+        this.dom.menu.setAttribute("role", "tree");
+        this.elements.menuItems[0].dom.link.tabIndex = 0;
+      } else {
+        this.dom.menu.setAttribute("role", "group");
+      }
+
       this.handleFocus();
       this.handleClick();
       this.handleHover();
@@ -2157,49 +2146,15 @@ class DisclosureMenu extends BaseMenu {
     }
   }
   /**
-   * Handles click events throughout the menu for proper use.
-   *
-   * Depending on what is supported either `touchstart` and `touchend` or
-   * `mousedown` and `mouseup` will be used for all "click" event handling.
-   *
-   * - Adds all event listeners listed in
-   *   {@link BaseMenu#handleClick|BaseMenu's handleClick method}, and
-   * - adds a `touchend`/`mouseup` listener to the `document` so if the user
-   *   clicks outside of the menu it will close if it is open.
-   *
-   */
-
-
-  handleClick() {
-    super.handleClick(); // Use touch over mouse events when supported.
-
-    const endEventType = isEventSupported("touchend", this.dom.menu) ? "touchend" : "mouseup"; // Close the menu if a click event happens outside of it.
-
-    document.addEventListener(endEventType, event => {
-      if (this.focusState !== "none") {
-        this.currentEvent = "mouse";
-
-        if (!this.dom.menu.contains(event.target) && !this.dom.menu !== event.target) {
-          this.closeChildren();
-          this.blur();
-
-          if (this.elements.controller) {
-            this.elements.controller.close();
-          }
-        }
-      }
-    });
-  }
-  /**
    * Handles keydown events throughout the menu for proper menu use.
    *
-   * This method exists to assist the {@link DisclosureMenu#handleKeyup|handleKeyup method}.
+   * This method exists to assist the {@link Treeview#handleKeyup|handleKeyup method}.
    * - Adds all `keydown` listeners from {@link BaseMenu#handleKeydown|BaseMenu's handleKeydown method}
    * - Adds a `keydown` listener to the menu/all submenus.
-   *   - Blocks propagation on the following keys: "Space", "Enter", and "Escape".
-   *   - _If_ {@link DisclosureMenu#optionalKeySupport|optional keyboard support}
-   *     is enabled, blocks propagation on the following keys:
-   *     "ArrowUp", "ArrowRight", "ArrowDown", "ArrowLeft", "Home", and "End".
+   *   - Blocks propagation on the following keys: "ArrowUp", "ArrowRight",
+   *     "ArrowDown", "ArrowLeft", "Home", "End", "Space", "Enter", "Escape",
+   *     "*" (asterisk), and "A" through "Z".
+   *   - Moves focus out if the "Tab" key is pressed.
    */
 
 
@@ -2207,24 +2162,28 @@ class DisclosureMenu extends BaseMenu {
     super.handleKeydown();
     this.dom.menu.addEventListener("keydown", event => {
       this.currentEvent = "keyboard";
-      const key = keyPress(event); // Prevent default event actions if we're handling the keyup event.
+      const key = keyPress(event);
+
+      if (key === "Tab") {
+        // Hitting Tab:
+        // - Moves focus out of the menu.
+        if (this.elements.rootMenu.focusState !== "none") {
+          this.elements.rootMenu.blur();
+        } else {
+          this.elements.rootMenu.focus();
+        }
+      }
 
       if (this.focusState === "self") {
-        const submenuKeys = ["Space", "Enter"];
+        const keys = ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "Asterisk", "Home", "End"];
+        const submenuKeys = ["Enter", "ArrowRight"];
         const controllerKeys = ["Escape"];
-        const parentKeys = ["Escape"];
 
-        if (this.optionalKeySupport) {
-          const keys = ["ArrowUp", "ArrowRight", "ArrowDown", "ArrowLeft", "Home", "End"];
-
-          if (keys.includes(key)) {
-            preventEvent(event);
-          }
+        if (keys.includes(key)) {
+          preventEvent(event);
         } else if (this.currentMenuItem.isSubmenuItem && submenuKeys.includes(key)) {
           preventEvent(event);
         } else if (this.elements.controller && controllerKeys.includes(key)) {
-          preventEvent(event);
-        } else if (this.elements.parentMenu && parentKeys.includes(key)) {
           preventEvent(event);
         }
       }
@@ -2236,19 +2195,20 @@ class DisclosureMenu extends BaseMenu {
    * Adds all `keyup` listeners from {@link BaseMenu#handleKeyup|BaseMenu's handleKeyup method}.
    *
    * Adds the following keybindings (explanations are taken from the
-   * {@link https://www.w3.org/TR/wai-aria-practices-1.2/examples/disclosure/disclosure-navigation.html#kbd_label|WAI ARIA Pracitices Example Disclosure for Navigation Menus}):
+   * {@link https://www.w3.org/TR/2019/WD-wai-aria-practices-1.2-20191218/examples/treeview/treeview-2/treeview-2a.html#kbd_label|Navigation Treeview Example Using Computed Properties}):
    *
    * | Key | Function |
    * | --- | --- |
-   * | _Tab_ or _Shift + Tab_ | Move keyboard focus among top-level buttons, and if a dropdown is open, into and through links in the dropdown. |
-   * | _Space_ or _Enter_ | <ul><li>If focus is on a disclosure button, activates the button, which toggles the visibility of the dropdown.</li><li>If focus is on a link:<ul><li>If any link has aria-current set, removes it.</li><li>Sets aria-current="page" on the focused link.</li><li>Activates the focused link.</li></ul></li></ul> |
-   * | _Escape_ | If a dropdown is open, closes it and sets focus on the button that controls that dropdown. |
-   * | _Down Arrow_ or _Right Arrow_ (Optional}) | <ul><li>If focus is on a button and its dropdown is collapsed, and it is not the last button, moves focus to the next button.</li><li>if focus is on a button and its dropdown is expanded, moves focus to the first link in the dropdown.</li><li>If focus is on a link, and it is not the last link, moves focus to the next link.</li></ul> |
-   * | _Up Arrow_ or _Left Arrow_ (Optional}) | <ul><li>If focus is on a button, and it is not the first button, moves focus to the previous button.</li><li>If focus is on a link, and it is not the first link, moves focus to the previous link.</li></ul> |
-   * | _Home_ (Optional}) | <ul><li>If focus is on a button, and it is not the first button, moves focus to the first button.</li><li>If focus is on a link, and it is not the first link, moves focus to the first link.</li></ul> |
-   * | _End_ (Optional}) | <ul><li>If focus is on a button, and it is not the last button, moves focus to the last button.</li><li>If focus is on a link, and it is not the last link, moves focus to the last link.</li></ul> |
-   *
-   * The optional keybindings are controlled by the menu's {@link DisclosureMenu#optionalKeySupport|optionalKeySupport} value.
+   * | _Enter_ or _Space_ | Performs the default action (e.g. onclick event) for the focused node. |
+   * | _Down arrow_ | <ul><li>Moves focus to the next node that is focusable without opening or closing a node.</li><li>If focus is on the last node, does nothing.</li></ul> |
+   * | _Up arrow_ | <ul><li>Moves focus to the previous node that is focusable without opening or closing a node.</li><li>If focus is on the first node, does nothing.</li></ul> |
+   * | _Right arrow_ | <ul><li>When focus is on a closed node, opens the node; focus does not move.</li><li>When focus is on a open node, moves focus to the first child node.</li><li>When focus is on an end node, does nothing.</li></ul> |
+   * | _Left arrow_ | <ul><li>When focus is on an open node, closes the node.</li><li>When focus is on a child node that is also either an end node or a closed node, moves focus to its parent node.</li><li>When focus is on a root node that is also either an end node or a closed node, does nothing.</li></ul> |
+   * | _Home_ | Moves focus to first node without opening or closing a node. |
+   * | _End_ | Moves focus to the last node that can be focused without expanding any nodes that are closed. |
+   * | _a-z_, _A-Z_ | <ul><li>Focus moves to the next node with a name that starts with the typed character.</li><li>Search wraps to first node if a matching name is not found among the nodes that follow the focused node.</li><li>Search ignores nodes that are descendants of closed nodes.</li></ul> |
+   * | _* (asterisk)_ | <ul><li>Expands all closed sibling nodes that are at the same level as the focused node.</li><li>Focus does not move.</li></ul> |
+   * | _Escape_ | If the root menu is collapsible, collapses the menu and focuses the menu's controlling element. |
    */
 
 
@@ -2257,71 +2217,254 @@ class DisclosureMenu extends BaseMenu {
     this.dom.menu.addEventListener("keyup", event => {
       this.currentEvent = "keyboard";
       const key = keyPress(event);
+      const {
+        altKey,
+        crtlKey,
+        metaKey
+      } = event;
+      const modifier = altKey || crtlKey || metaKey;
 
-      if (this.focusState === "self") {
-        if (key === "Space" || key === "Enter") {
+      if (key === "Character" && !modifier) {
+        // Hitting Character:
+        // - Focus moves to the next node with a name that starts with the typed character.
+        // - Search wraps to first node if a matching name is not found among the nodes that follow the focused node.
+        // - Search ignores nodes that are descendants of closed nodes.
+        preventEvent(event);
+        this.elements.rootMenu.currentEvent = "character";
+        this.focusNextNodeWithCharacter(event.key);
+      } else if (this.focusState === "self") {
+        if (key === "Enter" || key === "Space") {
           // Hitting Space or Enter:
-          // - If focus is on a disclosure button, activates the button, which toggles the visibility of the dropdown.
+          // - Performs the default action (e.g. onclick event) for the focused node.
+          // - If focus is on a closed node, opens the node; focus does not move.
+          preventEvent(event);
+
           if (this.currentMenuItem.isSubmenuItem) {
-            preventEvent(event);
-            this.currentMenuItem.elements.toggle.preview();
+            if (this.currentMenuItem.elements.toggle.isOpen) {
+              this.currentMenuItem.elements.toggle.close();
+            } else {
+              this.currentMenuItem.elements.toggle.preview();
+            }
           } else {
             this.currentMenuItem.dom.link.click();
           }
         } else if (key === "Escape") {
-          // Hitting Escape
-          // - If a dropdown is open, closes it.
-          // - If was within the closed dropdown, sets focus on the button that controls that dropdown.
-          const hasOpenChild = this.elements.submenuToggles.some(toggle => toggle.isOpen);
-
-          if (hasOpenChild) {
-            preventEvent(event);
-            this.closeChildren();
-          } else if (this.elements.parentMenu) {
-            preventEvent(event);
-            this.elements.parentMenu.currentEvent = this.currentEvent;
-            this.elements.parentMenu.closeChildren();
-            this.elements.parentMenu.focusCurrentChild();
-          } else if (this.isTopLevel && this.elements.controller && this.elements.controller.isOpen) {
+          if (this.isTopLevel && this.elements.controller && this.elements.controller.isOpen) {
             this.elements.controller.close();
             this.focusController();
           }
-        } else if (this.optionalKeySupport) {
-          if (key === "ArrowDown" || key === "ArrowRight") {
-            // Hitting the Down or Right Arrow:
-            // - If focus is on a button and its dropdown is collapsed, and it is not the last button, moves focus to the next button.
-            // - If focus is on a button and its dropdown is expanded, moves focus to the first link in the dropdown.
-            // - If focus is on a link, and it is not the last link, moves focus to the next link.
+        } else if (key === "ArrowDown") {
+          // Hitting the Down Arrow:
+          // - Moves focus to the next node that is focusable without opening or closing a node.
+          // - If focus is on the last node, does nothing.
+          preventEvent(event);
+
+          if (this.currentMenuItem.isSubmenuItem && this.currentMenuItem.elements.toggle.isOpen) {
+            this.blurCurrentChild();
+            this.currentMenuItem.elements.childMenu.currentEvent = this.currentEvent;
+            this.currentMenuItem.elements.childMenu.focusFirstChild();
+          } else if (!this.isTopLevel && this.currentChild === this.elements.menuItems.length - 1) {
+            this.focusParentsNextChild();
+          } else {
+            this.focusNextChild();
+          }
+        } else if (key === "ArrowUp") {
+          // Hitting the Up Arrow:
+          // - Moves focus to the previous node that is focusable without opening or closing a node.
+          // - If focus is on the first node, does nothing.
+          preventEvent(event);
+          const previousMenuItem = this.elements.menuItems[this.currentChild - 1];
+
+          if (previousMenuItem && previousMenuItem.isSubmenuItem && previousMenuItem.elements.toggle.isOpen) {
+            this.blurCurrentChild();
+            this.currentChild = this.currentChild - 1;
+            this.currentMenuItem.elements.childMenu.currentEvent = this.currentEvent;
+            this.focusChildsLastNode();
+          } else if (!this.isTopLevel && this.currentChild === 0) {
+            this.blurCurrentChild();
+            this.elements.parentMenu.currentEvent = this.currentEvent;
+            this.elements.parentMenu.focusCurrentChild();
+          } else {
+            this.focusPreviousChild();
+          }
+        } else if (key === "ArrowRight") {
+          // Hitting the Right Arrow:
+          // - When focus is on a closed node, opens the node; focus does not move.
+          // - When focus is on a open node, moves focus to the first child node.
+          // - When focus is on an end node, does nothing.
+          if (this.currentMenuItem.isSubmenuItem) {
             preventEvent(event);
 
-            if (this.currentMenuItem.isSubmenuItem && this.currentMenuItem.elements.toggle.isOpen) {
-              this.currentMenuItem.elements.childMenu.currentEvent = "keyboard";
+            if (this.currentMenuItem.elements.toggle.isOpen) {
+              this.blurCurrentChild();
+              this.currentMenuItem.elements.childMenu.currentEvent = this.currentEvent;
               this.currentMenuItem.elements.childMenu.focusFirstChild();
             } else {
-              this.focusNextChild();
+              this.currentMenuItem.elements.toggle.preview();
             }
-          } else if (key === "ArrowUp" || key === "ArrowLeft") {
-            // Hitting the Up or Left Arrow:
-            // - If focus is on a button, and it is not the first button, moves focus to the previous button.
-            // - If focus is on a link, and it is not the first link, moves focus to the previous link.
-            preventEvent(event);
-            this.focusPreviousChild();
-          } else if (key === "Home") {
-            // Hitting Home:
-            // - If focus is on a button, and it is not the first button, moves focus to the first button.
-            // - If focus is on a link, and it is not the first link, moves focus to the first link.
-            preventEvent(event);
-            this.focusFirstChild();
-          } else if (key === "End") {
-            // Hitting End:
-            // - If focus is on a button, and it is not the last button, moves focus to the last button.
-            // - If focus is on a link, and it is not the last link, moves focus to the last link.
-            preventEvent(event);
-            this.focusLastChild();
           }
+        } else if (key === "ArrowLeft") {
+          // Hitting the Left Arrow:
+          // - When focus is on an open node, closes the node.
+          // - When focus is on a child node that is also either an end node or a closed node, moves focus to its parent node.
+          // - When focus is on a root node that is also either an end node or a closed node, does nothing.
+          preventEvent(event);
+
+          if (this.currentMenuItem.isSubmenuItem && this.currentMenuItem.elements.toggle.isOpen) {
+            this.currentMenuItem.elements.childMenu.blurCurrentChild();
+            this.currentMenuItem.elements.toggle.close();
+          } else if (!this.isTopLevel) {
+            this.blurCurrentChild();
+            this.elements.parentMenu.currentEvent = this.currentEvent;
+            this.elements.parentMenu.focusCurrentChild();
+          }
+        } else if (key === "Home") {
+          // Hitting Home:
+          // - Moves focus to first node without opening or closing a node.
+          preventEvent(event);
+          this.blurCurrentChild();
+          this.elements.rootMenu.focusFirstChild();
+        } else if (key === "End") {
+          // Hitting End:
+          // - Moves focus to the last node that can be focused without expanding any nodes that are closed.
+          preventEvent(event);
+          this.blurCurrentChild();
+          this.elements.rootMenu.focusLastNode();
+        } else if (key === "Asterisk") {
+          // Hitting Asterisk:
+          // - Expands all closed sibling nodes that are at the same level as the focused node.
+          // - Focus does not move.
+          preventEvent(event);
+          this.openChildren();
         }
       }
     });
+  }
+  /**
+   * Focus the menu's last node of the entire expanded menu.
+   *
+   * This includes all _open_ child menu items.
+   */
+
+
+  focusLastNode() {
+    const numberOfItems = this.elements.menuItems.length - 1;
+    const lastChild = this.elements.menuItems[numberOfItems];
+
+    if (lastChild.isSubmenuItem && lastChild.elements.toggle.isOpen) {
+      this.currentChild = numberOfItems;
+      lastChild.elements.childMenu.currentEvent = this.currentEvent;
+      lastChild.elements.childMenu.focusLastNode();
+    } else {
+      this.focusLastChild();
+    }
+  }
+  /**
+   * Open all submenu children.
+   */
+
+
+  openChildren() {
+    this.elements.submenuToggles.forEach(toggle => toggle.preview());
+  }
+  /**
+   * Focus the menu's next node starting with a specific letter.
+   *
+   * This includes all _open_ child menu items.
+   *
+   * Wraps to the first node if no match is found after the current node.
+   *
+   * @param {string} char - The character to look for.
+   */
+
+
+  focusNextNodeWithCharacter(char) {
+    /**
+     * Gets all the menu's items and submenu's items.
+     *
+     * @param {Treeview} menu - The menu.
+     *
+     * @returns {TreeviewItem[]} - The menu items.
+     */
+    function getOpenMenuItems(menu) {
+      let menuItems = [];
+      menu.elements.menuItems.forEach(menuItem => {
+        menuItems.push(menuItem);
+
+        if (menuItem.isSubmenuItem && menuItem.elements.toggle.isOpen) {
+          menuItems = [...menuItems, ...getOpenMenuItems(menuItem.elements.toggle.elements.controlledMenu)];
+        }
+      });
+      return menuItems;
+    } // Ensure the character is lowercase just to be safe.
+
+
+    const match = char.toLowerCase(); // Sort the menu items so the child _after_ the current child is first to be searched.
+
+    const menuItems = getOpenMenuItems(this.elements.rootMenu);
+    const currentItem = menuItems.indexOf(this.currentMenuItem) + 1;
+    const sortedMenuItems = [...menuItems.slice(currentItem), ...menuItems.slice(0, currentItem)];
+    let ctr = 0;
+    let found = false;
+
+    while (!found && ctr < sortedMenuItems.length) {
+      let text = ""; // Attempt to use the browser to get proper innerText,
+      // otherwise fall back to textContent.
+
+      if (sortedMenuItems[ctr].dom.item.innerText) {
+        text = sortedMenuItems[ctr].dom.item.innerText;
+      } else {
+        text = sortedMenuItems[ctr].dom.item.textContent;
+      } // Remove spaces, make lowercase, and grab the first chracter of the string.
+
+
+      text = text.replace(/[\s]/g, "").toLowerCase().charAt(0); // Focus the child if the text matches, otherwise move on.
+
+      if (text === match) {
+        found = true;
+        const menu = sortedMenuItems[ctr].elements.parentMenu;
+        const index = menu.elements.menuItems.indexOf(sortedMenuItems[ctr]);
+        this.elements.rootMenu.blurChildren();
+        menu.focusChild(index);
+      }
+
+      ctr++;
+    }
+  }
+  /**
+   * Focus the parent menu's next child.
+   *
+   * This will cascade up through to the root menu.
+   */
+
+
+  focusParentsNextChild() {
+    if (!this.elements.parentMenu) return;
+    this.elements.parentMenu.currentEvent = this.currentEvent;
+
+    if (this.elements.parentMenu.currentChild === this.elements.parentMenu.elements.menuItems.length - 1) {
+      this.elements.parentMenu.blurCurrentChild();
+      this.elements.parentMenu.focusParentsNextChild();
+    } else {
+      this.blurChildren();
+      this.elements.parentMenu.focusNextChild();
+    }
+  }
+  /**
+   * Focus the last child of the current child's submenu.
+   *
+   * This will cascade down through to the last open menu.
+   */
+
+
+  focusChildsLastNode() {
+    this.currentMenuItem.elements.childMenu.currentEvent = this.currentEvent;
+    this.currentMenuItem.elements.childMenu.focusLastChild();
+
+    if (this.currentMenuItem.elements.childMenu.currentMenuItem.isSubmenuItem && this.currentMenuItem.elements.childMenu.currentMenuItem.elements.toggle.isOpen) {
+      this.currentMenuItem.elements.childMenu.blurCurrentChild();
+      this.currentMenuItem.elements.childMenu.focusChildsLastNode();
+    }
   }
 
 }
@@ -2344,27 +2487,26 @@ function _isNativeReflectConstruct$2() { if (typeof Reflect === "undefined" || !
 
 function _getPrototypeOf$2(o) { _getPrototypeOf$2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf$2(o); }
 /**
- * A basic navigation link contained inside of a Bootstrap4DisclosureMenu.
+ * A basic navigation link contained inside of a Bootstrap4Treeview.
  */
 
-var Bootstrap4DisclosureMenuItem = /*#__PURE__*/function (_DisclosureMenuItem) {
-  _inherits$2(Bootstrap4DisclosureMenuItem, _DisclosureMenuItem);
+var Bootstrap4TreeviewItem = /*#__PURE__*/function (_TreeviewItem) {
+  _inherits$2(Bootstrap4TreeviewItem, _TreeviewItem);
 
-  var _super = _createSuper$2(Bootstrap4DisclosureMenuItem);
+  var _super = _createSuper$2(Bootstrap4TreeviewItem);
 
   /**
-   * {@inheritdoc}
-   *
-   * @param {object}                              param0                         - The menu item object.
-   * @param {HTMLElement}                         param0.menuItemElement         - The menu item in the DOM.
-   * @param {HTMLElement}                         param0.menuLinkElement         - The menu item's link in the DOM.
-   * @param {Bootstrap4DisclosureMenu}            param0.parentMenu              - The parent menu.
-   * @param {boolean}                             [param0.isSubmenuItem = false] - A flag to mark if the menu item is controlling a submenu.
-   * @param {Bootstrap4DisclosureMenu|null}       [param0.childMenu = null]      - The child menu.
-   * @param {Bootstrap4DisclosureMenuToggle|null} [param0.toggle = null]         - The controller for the child menu.
-   * @param {boolean}                             [param0.initialize = true]     - A flag to initialize the menu item immediately upon creation.
+   * @inheritdoc
+   * @param {object}                        options                         - The options for generating the menu item.
+   * @param {HTMLElement}                   options.menuItemElement         - The menu item in the DOM.
+   * @param {HTMLElement}                   options.menuLinkElement         - The menu item's link in the DOM.
+   * @param {Treeview}                      options.parentMenu              - The parent menu.
+   * @param {boolean}                       [options.isSubmenuItem = false] - A flag to mark if the menu item is controlling a submenu.
+   * @param {Bootstrap4Treeview|null}       [options.childMenu = null]      - The child menu.
+   * @param {Bootstrap4TreeviewToggle|null} [options.toggle = null]         - The controller for the child menu.
+   * @param {boolean}                       [options.initialize = true]     - A flag to initialize the menu item immediately upon creation.
    */
-  function Bootstrap4DisclosureMenuItem(_ref) {
+  function Bootstrap4TreeviewItem(_ref) {
     var _this;
 
     var menuItemElement = _ref.menuItemElement,
@@ -2379,7 +2521,7 @@ var Bootstrap4DisclosureMenuItem = /*#__PURE__*/function (_DisclosureMenuItem) {
         _ref$initialize = _ref.initialize,
         initialize = _ref$initialize === void 0 ? true : _ref$initialize;
 
-    _classCallCheck$2(this, Bootstrap4DisclosureMenuItem);
+    _classCallCheck$2(this, Bootstrap4TreeviewItem);
 
     _this = _super.call(this, {
       menuItemElement: menuItemElement,
@@ -2398,8 +2540,8 @@ var Bootstrap4DisclosureMenuItem = /*#__PURE__*/function (_DisclosureMenuItem) {
     return _this;
   }
 
-  return Bootstrap4DisclosureMenuItem;
-}(DisclosureMenuItem);
+  return Bootstrap4TreeviewItem;
+}(TreeviewItem);
 
 function _typeof$1(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof$1 = function _typeof(obj) { return typeof obj; }; } else { _typeof$1 = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof$1(obj); }
 
@@ -2438,26 +2580,25 @@ function _assertThisInitialized$1(self) { if (self === void 0) { throw new Refer
 function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf$1(o) { _getPrototypeOf$1 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf$1(o); }
-/*
- * A link or button that controls the visibility of a Bootstrap4DisclosureMenu.
+/**
+ * A link or button that controls the visibility of a Bootstrap4Treeview.
  */
 
-var Bootstrap4DisclosureMenuToggle = /*#__PURE__*/function (_DisclosureMenuToggle) {
-  _inherits$1(Bootstrap4DisclosureMenuToggle, _DisclosureMenuToggle);
+var Bootstrap4TreeviewToggle = /*#__PURE__*/function (_TreeviewToggle) {
+  _inherits$1(Bootstrap4TreeviewToggle, _TreeviewToggle);
 
-  var _super = _createSuper$1(Bootstrap4DisclosureMenuToggle);
+  var _super = _createSuper$1(Bootstrap4TreeviewToggle);
 
   /**
-   * {@inheritdoc}
-   *
-   * @param {object}                        param0                     - The menu toggle object.
-   * @param {HTMLElement}                   param0.menuToggleElement   - The toggle element in the DOM.
-   * @param {HTMLElement}                   param0.parentElement       - The element containing the controlled menu.
-   * @param {Bootstrap4DisclosureMenu}      param0.controlledMenu      - The menu controlled by this toggle.
-   * @param {Bootstrap4DisclosureMenu|null} [param0.parentMenu = null] - The menu containing this toggle.
-   * @param {boolean}                       [param0.initialize = true] - A flag to initialize the menu toggle immediately upon creation.
+   * @inheritdoc
+   * @param {object}                            options                     - The options for generating the menu toggle.
+   * @param {HTMLElement}                       options.menuToggleElement   - The toggle element in the DOM.
+   * @param {HTMLElement}                       options.parentElement       - The element containing the controlled menu.
+   * @param {Bootstrap4TreeviewNavigation}      options.controlledMenu      - The menu controlled by this toggle.
+   * @param {Bootstrap4TreeviewNavigation|null} [options.parentMenu = null] - The menu containing this toggle.
+   * @param {boolean}                           [options.initialize = true] - A flag to initialize the menu toggle immediately upon creation.
    */
-  function Bootstrap4DisclosureMenuToggle(_ref) {
+  function Bootstrap4TreeviewToggle(_ref) {
     var _this;
 
     var menuToggleElement = _ref.menuToggleElement,
@@ -2468,7 +2609,7 @@ var Bootstrap4DisclosureMenuToggle = /*#__PURE__*/function (_DisclosureMenuToggl
         _ref$initialize = _ref.initialize,
         initialize = _ref$initialize === void 0 ? true : _ref$initialize;
 
-    _classCallCheck$1(this, Bootstrap4DisclosureMenuToggle);
+    _classCallCheck$1(this, Bootstrap4TreeviewToggle);
 
     _this = _super.call(this, {
       menuToggleElement: menuToggleElement,
@@ -2493,10 +2634,10 @@ var Bootstrap4DisclosureMenuToggle = /*#__PURE__*/function (_DisclosureMenuToggl
    */
 
 
-  _createClass(Bootstrap4DisclosureMenuToggle, [{
+  _createClass(Bootstrap4TreeviewToggle, [{
     key: "initialize",
     value: function initialize() {
-      _get(_getPrototypeOf$1(Bootstrap4DisclosureMenuToggle.prototype), "initialize", this).call(this);
+      _get(_getPrototypeOf$1(Bootstrap4TreeviewToggle.prototype), "initialize", this).call(this);
 
       this.dom.container.classList.add("collapse");
 
@@ -2594,8 +2735,8 @@ var Bootstrap4DisclosureMenuToggle = /*#__PURE__*/function (_DisclosureMenuToggl
     }
   }]);
 
-  return Bootstrap4DisclosureMenuToggle;
-}(DisclosureMenuToggle);
+  return Bootstrap4TreeviewToggle;
+}(TreeviewToggle);
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -2615,38 +2756,36 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 /**
- * An accessible disclosure menu in the DOM using Bootstrap 4.
+ * An accessible treeview navigation in the DOM.
  *
- * See https://www.w3.org/TR/wai-aria-practices-1.2/examples/disclosure/disclosure-navigation.html
+ * See https://www.w3.org/TR/wai-aria-practices-1.2/examples/treeview/treeview-2/treeview-2a.html
  */
 
-var Bootstrap4DisclosureMenu = /*#__PURE__*/function (_DisclosureMenu) {
-  _inherits(Bootstrap4DisclosureMenu, _DisclosureMenu);
+var Bootstrap4Treeview = /*#__PURE__*/function (_Treeview) {
+  _inherits(Bootstrap4Treeview, _Treeview);
 
-  var _super = _createSuper(Bootstrap4DisclosureMenu);
+  var _super = _createSuper(Bootstrap4Treeview);
 
   /**
-   * {@inheritdoc}
-   *
-   * @param {object}                        param0                               - The menu object.
-   * @param {HTMLElement}                   param0.menuElement                   - The menu element in the DOM.
-   * @param {string}                        [param0.menuItemSelector = "li"]     - The CSS selector string for menu items.
-   * @param {string}                        [param0.menuLinkSelector = "a"]      - The CSS selector string for menu links.
-   * @param {string}                        [param0.submenuItemSelector = ""]    - The CSS selector string for menu items containing submenus.
-   * @param {string}                        [param0.submenuToggleSelector = "a"] - The CSS selector string for submenu toggle buttons/links.
-   * @param {string}                        [param0.submenuSelector = "ul"]      - The CSS selector string for submenus.
-   * @param {HTMLElement|null}              [param0.controllerElement = null]    - The element controlling the menu in the DOM.
-   * @param {HTMLElement|null}              [param0.containerElement = null]     - The element containing the menu in the DOM.
-   * @param {string}                        [param0.openClass = "show"]          - The class to apply when a menu is "open".
-   * @param {string}                        [param0.closeClass = ""]             - The class to apply when a menu is "closed".
-   * @param {boolean}                       [param0.isTopLevel = false]          - A flag to mark the root menu.
-   * @param {Bootstrap4DisclosureMenu|null} [param0.parentMenu = null]           - The parent menu to this menu.
-   * @param {string}                        [param0.hoverType = "off"]           - The type of hoverability a menu has.
-   * @param {number}                        [param0.hoverDelay = 250]            - The delay for closing menus if the menu is hoverable (in miliseconds).
-   * @param {boolean}                       [param0.optionalKeySupport = false]  - A flag to add optional keyboard support (Arrow keys, Home, and End) to the menu.
-   * @param {boolean}                       [param0.initialize = true]           - A flag to initialize the menu immediately upon creation.
+   * @inheritdoc
+   * @param {object}                  options                             - The options for generating the menu.
+   * @param {HTMLElement}             options.menuElement                 - The menu element in the DOM.
+   * @param {string}                  [options.menuItemSelector = li]     - The CSS selector string for menu items.
+   * @param {string}                  [options.menuLinkSelector = a]      - The CSS selector string for menu links.
+   * @param {string}                  [options.submenuItemSelector = ""]  - The CSS selector string for menu items containing submenus.
+   * @param {string}                  [options.submenuToggleSelector = a] - The CSS selector string for submenu toggle buttons/links.
+   * @param {string}                  [options.submenuSelector = ul]      - The CSS selector string for submenus.
+   * @param {HTMLElement|null}        [options.controllerElement = null]  - The element controlling the menu in the DOM.
+   * @param {HTMLElement|null}        [options.containerElement = null]   - The element containing the menu in the DOM.
+   * @param {string|string[]|null}    [options.openClass = show]          - The class to apply when a menu is "open".
+   * @param {string|string[]|null}    [options.closeClass = hide]         - The class to apply when a menu is "closed".
+   * @param {boolean}                 [options.isTopLevel = false]        - A flag to mark the root menu.
+   * @param {Bootstrap4Treeview|null} [options.parentMenu = null]         - The parent menu to this menu.
+   * @param {string}                  [options.hoverType = off]           - The type of hoverability a menu has.
+   * @param {number}                  [options.hoverDelay = 250]          - The delay for closing menus if the menu is hoverable (in miliseconds).
+   * @param {boolean}                 [options.initialize = true]         - A flag to initialize the menu immediately upon creation.
    */
-  function Bootstrap4DisclosureMenu(_ref) {
+  function Bootstrap4Treeview(_ref) {
     var _this;
 
     var menuElement = _ref.menuElement,
@@ -2667,7 +2806,7 @@ var Bootstrap4DisclosureMenu = /*#__PURE__*/function (_DisclosureMenu) {
         _ref$openClass = _ref.openClass,
         openClass = _ref$openClass === void 0 ? "show" : _ref$openClass,
         _ref$closeClass = _ref.closeClass,
-        closeClass = _ref$closeClass === void 0 ? "" : _ref$closeClass,
+        closeClass = _ref$closeClass === void 0 ? "hide" : _ref$closeClass,
         _ref$isTopLevel = _ref.isTopLevel,
         isTopLevel = _ref$isTopLevel === void 0 ? true : _ref$isTopLevel,
         _ref$parentMenu = _ref.parentMenu,
@@ -2676,12 +2815,10 @@ var Bootstrap4DisclosureMenu = /*#__PURE__*/function (_DisclosureMenu) {
         hoverType = _ref$hoverType === void 0 ? "off" : _ref$hoverType,
         _ref$hoverDelay = _ref.hoverDelay,
         hoverDelay = _ref$hoverDelay === void 0 ? 250 : _ref$hoverDelay,
-        _ref$optionalKeySuppo = _ref.optionalKeySupport,
-        optionalKeySupport = _ref$optionalKeySuppo === void 0 ? false : _ref$optionalKeySuppo,
         _ref$initialize = _ref.initialize,
         initialize = _ref$initialize === void 0 ? true : _ref$initialize;
 
-    _classCallCheck(this, Bootstrap4DisclosureMenu);
+    _classCallCheck(this, Bootstrap4Treeview);
 
     _this = _super.call(this, {
       menuElement: menuElement,
@@ -2698,13 +2835,12 @@ var Bootstrap4DisclosureMenu = /*#__PURE__*/function (_DisclosureMenu) {
       parentMenu: parentMenu,
       hoverType: hoverType,
       hoverDelay: hoverDelay,
-      optionalKeySupport: optionalKeySupport,
-      initialize: false
+      initialize: true
     }); // Set default class types.
 
-    _this.MenuType = Bootstrap4DisclosureMenu;
-    _this.MenuItemType = Bootstrap4DisclosureMenuItem;
-    _this.MenuToggleType = Bootstrap4DisclosureMenuToggle;
+    _this.MenuType = Bootstrap4Treeview;
+    _this.MenuItemType = Bootstrap4TreeviewItem;
+    _this.MenuToggleType = Bootstrap4TreeviewToggle;
 
     if (initialize) {
       _this.initialize();
@@ -2713,8 +2849,8 @@ var Bootstrap4DisclosureMenu = /*#__PURE__*/function (_DisclosureMenu) {
     return _this;
   }
 
-  return Bootstrap4DisclosureMenu;
-}(DisclosureMenu);
+  return Bootstrap4Treeview;
+}(Treeview);
 
-export default Bootstrap4DisclosureMenu;
-//# sourceMappingURL=disclosure-menu-bs4.esm.js.map
+export default Bootstrap4Treeview;
+//# sourceMappingURL=treeview-bs4.esm.js.map
