@@ -84,4 +84,56 @@ export default [
       },
     ],
   },
+  {
+    input: "./src/bootstrap4Menubar.js",
+    plugins: [babel({ babelHelpers: "inline" }), resolve()],
+    output: [
+      {
+        name: "Bootstrap4Menubar",
+        format: "iife",
+        sourcemap: true,
+        file: "dist/menubar-bs4.js",
+        globals: {
+          "accessible-menu/src/menubar.js": "Menubar",
+          "accessible-menu/src/menubarItem.js": "MenubarItem",
+          "accessible-menu/src/menubarToggle.js": "MenubarToggle",
+        },
+      },
+      {
+        name: "Bootstrap4Menubar",
+        format: "iife",
+        sourcemap: true,
+        file: "dist/menubar-bs4.min.js",
+        globals: {
+          "accessible-menu/src/menubar.js": "Menubar",
+          "accessible-menu/src/menubarItem.js": "MenubarItem",
+          "accessible-menu/src/menubarToggle.js": "MenubarToggle",
+        },
+        plugins: [terser()],
+      },
+      {
+        name: "Bootstrap4Menubar",
+        format: "esm",
+        sourcemap: true,
+        file: "dist/menubar-bs4.esm.js",
+        globals: {
+          "accessible-menu/src/menubar.js": "Menubar",
+          "accessible-menu/src/menubarItem.js": "MenubarItem",
+          "accessible-menu/src/menubarToggle.js": "MenubarToggle",
+        },
+      },
+      {
+        name: "Bootstrap4Menubar",
+        format: "esm",
+        sourcemap: true,
+        file: "dist/menubar-bs4.esm.min.js",
+        globals: {
+          "accessible-menu/src/menubar.js": "Menubar",
+          "accessible-menu/src/menubarItem.js": "MenubarItem",
+          "accessible-menu/src/menubarToggle.js": "MenubarToggle",
+        },
+        plugins: [terser()],
+      },
+    ],
+  },
 ];
