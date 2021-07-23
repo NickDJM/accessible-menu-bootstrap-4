@@ -1,11 +1,12 @@
 import { babel } from "@rollup/plugin-babel";
 import resolve from "@rollup/plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
+import cleanup from "rollup-plugin-cleanup";
 
 export default [
   {
     input: "./rollup.js",
-    plugins: [babel({ babelHelpers: "inline" }), resolve()],
+    plugins: [babel({ babelHelpers: "inline" }), resolve(), cleanup()],
     output: [
       {
         name: "AccessibleMenuBootstrap4",
@@ -46,7 +47,7 @@ export default [
   },
   {
     input: "./src/bootstrap4DisclosureMenu.js",
-    plugins: [babel({ babelHelpers: "inline" }), resolve()],
+    plugins: [babel({ babelHelpers: "inline" }), resolve(), cleanup()],
     output: [
       {
         name: "Bootstrap4DisclosureMenu",
@@ -98,7 +99,7 @@ export default [
   },
   {
     input: "./src/bootstrap4Menubar.js",
-    plugins: [babel({ babelHelpers: "inline" }), resolve()],
+    plugins: [babel({ babelHelpers: "inline" }), resolve(), cleanup()],
     output: [
       {
         name: "Bootstrap4Menubar",
@@ -150,7 +151,7 @@ export default [
   },
   {
     input: "./src/bootstrap4Treeview.js",
-    plugins: [babel({ babelHelpers: "inline" }), resolve()],
+    plugins: [babel({ babelHelpers: "inline" }), resolve(), cleanup()],
     output: [
       {
         name: "Bootstrap4Treeview",
