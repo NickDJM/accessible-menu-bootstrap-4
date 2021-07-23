@@ -7,14 +7,29 @@ import DisclosureMenuToggle from "accessible-menu/src/disclosureMenuToggle.js";
  */
 class Bootstrap4DisclosureMenuToggle extends DisclosureMenuToggle {
   /**
-   * {@inheritdoc}
+   * The DOM elements within the menu toggle.
    *
-   * @param {object}                        param0                     - The menu toggle object.
-   * @param {HTMLElement}                   param0.menuToggleElement   - The toggle element in the DOM.
-   * @param {HTMLElement}                   param0.parentElement       - The element containing the controlled menu.
-   * @param {Bootstrap4DisclosureMenu}      param0.controlledMenu      - The menu controlled by this toggle.
-   * @param {Bootstrap4DisclosureMenu|null} [param0.parentMenu = null] - The menu containing this toggle.
-   * @param {boolean}                       [param0.initialize = true] - A flag to initialize the menu toggle immediately upon creation.
+   * @type {object.<HTMLElement>}
+   * @property {HTMLElement} toggle    - The menu toggle.
+   * @property {HTMLElement} parent    - The menu containing this toggle.
+   * @property {HTMLElement} container - The element that controlls the visibility of the child menu.
+   * @protected
+   */
+  _dom = {
+    toggle: null,
+    parent: null,
+    container: null,
+  };
+
+  /**
+   * Constructs the menu toggle.
+   *
+   * @param {object}                        options                     - The options for generating the menu toggle.
+   * @param {HTMLElement}                   options.menuToggleElement   - The toggle element in the DOM.
+   * @param {HTMLElement}                   options.parentElement       - The element containing the controlled menu.
+   * @param {Bootstrap4DisclosureMenu}      options.controlledMenu      - The menu controlled by this toggle.
+   * @param {Bootstrap4DisclosureMenu|null} [options.parentMenu = null] - The menu containing this toggle.
+   * @param {boolean}                       [options.initialize = true] - A flag to initialize the menu toggle immediately upon creation.
    */
   constructor({
     menuToggleElement,
@@ -31,9 +46,11 @@ class Bootstrap4DisclosureMenuToggle extends DisclosureMenuToggle {
       initialize: false,
     });
 
-    // Set the container for the toggle.
-    // This differs based on if the menu is top-level or not.
-    this.domElements.container = controlledMenu.isTopLevel
+    // Set DOM elements.
+    this._dom.toggle = menuToggleElement;
+    this._dom.parent = parentElement;
+    // The container differs based on if the menu is top-level or not.
+    this._dom.container = controlledMenu.isTopLevel
       ? controlledMenu.dom.container
       : controlledMenu.dom.menu;
 

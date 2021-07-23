@@ -7,13 +7,29 @@ import TreeviewToggle from "accessible-menu/src/treeviewToggle.js";
  */
 class Bootstrap4TreeviewToggle extends TreeviewToggle {
   /**
-   * @inheritdoc
-   * @param {object}                            options                     - The options for generating the menu toggle.
-   * @param {HTMLElement}                       options.menuToggleElement   - The toggle element in the DOM.
-   * @param {HTMLElement}                       options.parentElement       - The element containing the controlled menu.
-   * @param {Bootstrap4TreeviewNavigation}      options.controlledMenu      - The menu controlled by this toggle.
-   * @param {Bootstrap4TreeviewNavigation|null} [options.parentMenu = null] - The menu containing this toggle.
-   * @param {boolean}                           [options.initialize = true] - A flag to initialize the menu toggle immediately upon creation.
+   * The DOM elements within the menu toggle.
+   *
+   * @type {object.<HTMLElement>}
+   * @property {HTMLElement} toggle    - The menu toggle.
+   * @property {HTMLElement} parent    - The menu containing this toggle.
+   * @property {HTMLElement} container - The element that controlls the visibility of the child menu.
+   * @protected
+   */
+  _dom = {
+    toggle: null,
+    parent: null,
+    container: null,
+  };
+
+  /**
+   * Constructs the menu toggle.
+   *
+   * @param {object}                  options                     - The options for generating the menu toggle.
+   * @param {HTMLElement}             options.menuToggleElement   - The toggle element in the DOM.
+   * @param {HTMLElement}             options.parentElement       - The element containing the controlled menu.
+   * @param {Bootstrap4Treeview}      options.controlledMenu      - The menu controlled by this toggle.
+   * @param {Bootstrap4Treeview|null} [options.parentMenu = null] - The menu containing this toggle.
+   * @param {boolean}                 [options.initialize = true] - A flag to initialize the menu toggle immediately upon creation.
    */
   constructor({
     menuToggleElement,
@@ -30,9 +46,11 @@ class Bootstrap4TreeviewToggle extends TreeviewToggle {
       initialize: false,
     });
 
-    // Set the container for the toggle.
-    // This differs based on if the menu is top-level or not.
-    this.domElements.container = controlledMenu.isTopLevel
+    // Set DOM elements.
+    this._dom.toggle = menuToggleElement;
+    this._dom.parent = parentElement;
+    // The container differs based on if the menu is top-level or not.
+    this._dom.container = controlledMenu.isTopLevel
       ? controlledMenu.dom.container
       : controlledMenu.dom.menu;
 
@@ -47,8 +65,6 @@ class Bootstrap4TreeviewToggle extends TreeviewToggle {
    */
   initialize() {
     super.initialize();
-
-    this.dom.container.classList.add("collapse");
 
     if (this.dom.toggle.hasAttribute("data-toggle")) {
       this.dom.toggle.removeAttribute("data-toggle");
@@ -67,7 +83,7 @@ class Bootstrap4TreeviewToggle extends TreeviewToggle {
    * @param {boolean} [emit = true] - A toggle to emit the expand event once expanded.
    */
   expand(emit = true) {
-    const { closeClass, openClass } = this.elements.controlledMenu;
+    const { openClass } = this.elements.controlledMenu;
 
     this.dom.toggle.setAttribute("aria-expanded", "true");
 
@@ -77,15 +93,6 @@ class Bootstrap4TreeviewToggle extends TreeviewToggle {
         this.dom.container.classList.add(openClass);
       } else {
         this.dom.container.classList.add(...openClass);
-      }
-    }
-
-    // Remove the close class.
-    if (closeClass !== "") {
-      if (typeof closeClass === "string") {
-        this.dom.container.classList.remove(closeClass);
-      } else {
-        this.dom.container.classList.remove(...closeClass);
       }
     }
 

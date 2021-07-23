@@ -9,36 +9,60 @@ import Bootstrap4MenubarToggle from "./bootstrap4MenubarToggle.js";
  */
 class Bootstrap4Menubar extends Menubar {
   /**
-   * {@inheritdoc}
+   * The class to use when generating submenus.
    *
-   * @param {object}                 param0                               - The menu object.
-   * @param {HTMLElement}            param0.menuElement                   - The menu element in the DOM.
-   * @param {string}                 [param0.menuItemSelector = "li"]     - The CSS selector string for menu items.
-   * @param {string}                 [param0.menuLinkSelector = "a"]      - The CSS selector string for menu links.
-   * @param {string}                 [param0.submenuItemSelector = ""]    - The CSS selector string for menu items containing submenus.
-   * @param {string}                 [param0.submenuToggleSelector = "a"] - The CSS selector string for submenu toggle buttons/links.
-   * @param {string}                 [param0.submenuSelector = "ul"]      - The CSS selector string for submenus.
-   * @param {HTMLElement|null}       [param0.controllerElement = null]    - The element controlling the menu in the DOM.
-   * @param {HTMLElement|null}       [param0.containerElement = null]     - The element containing the menu in the DOM.
-   * @param {string}                 [param0.openClass = "show"]          - The class to apply when a menu is "open".
-   * @param {string}                 [param0.closeClass = ""]             - The class to apply when a menu is "closed".
-   * @param {boolean}                [param0.isTopLevel = false]          - A flag to mark the root menu.
-   * @param {Bootstrap4Menubar|null} [param0.parentMenu = null]           - The parent menu to this menu.
-   * @param {string}                 [param0.hoverType = "off"]           - The type of hoverability a menu has.
-   * @param {number}                 [param0.hoverDelay = 250]            - The delay for closing menus if the menu is hoverable (in miliseconds).
-   * @param {boolean}                [param0.initialize = true]           - A flag to initialize the menu immediately upon creation.
+   * @type {typeof Bootstrap4Menubar}
+   * @public
+   */
+  _MenuType = Bootstrap4Menubar;
+
+  /**
+   * The class to use when generating menu items.
+   *
+   * @type {typeof Bootstrap4MenubarItem}
+   * @public
+   */
+  _MenuItemType = Bootstrap4MenubarItem;
+
+  /**
+   * The class to use when generating submenu toggles.
+   *
+   * @type {typeof Bootstrap4MenubarToggle}
+   * @public
+   */
+  _MenuToggleType = Bootstrap4MenubarToggle;
+
+  /**
+   * Constructs the menu.
+   *
+   * @param {object}                   options                             - The options for generating the menu.
+   * @param {HTMLElement}              options.menuElement                 - The menu element in the DOM.
+   * @param {string}                   [options.menuItemSelector = li]     - The CSS selector string for menu items.
+   * @param {string}                   [options.menuLinkSelector = a]      - The CSS selector string for menu links.
+   * @param {string}                   [options.submenuItemSelector]       - The CSS selector string for menu items containing submenus.
+   * @param {string}                   [options.submenuToggleSelector = a] - The CSS selector string for submenu toggle buttons/links.
+   * @param {string}                   [options.submenuSelector = ul]      - The CSS selector string for submenus.
+   * @param {(HTMLElement|null)}       [options.controllerElement = null]  - The element controlling the menu in the DOM.
+   * @param {(HTMLElement|null)}       [options.containerElement = null]   - The element containing the menu in the DOM.
+   * @param {(string|string[]|null)}   [options.openClass = show]          - The class to apply when a menu is "open".
+   * @param {(string|string[]|null)}   [options.closeClass = collapse]     - The class to apply when a menu is "closed".
+   * @param {boolean}                  [options.isTopLevel = false]        - A flag to mark the root menu.
+   * @param {(Bootstrap4Menubar|null)} [options.parentMenu = null]         - The parent menu to this menu.
+   * @param {string}                   [options.hoverType = off]           - The type of hoverability a menu has.
+   * @param {number}                   [options.hoverDelay = 250]          - The delay for closing menus if the menu is hoverable (in miliseconds).
+   * @param {boolean}                  [options.initialize = true]         - A flag to initialize the menu immediately upon creation.
    */
   constructor({
     menuElement,
-    menuItemSelector = "li",
-    menuLinkSelector = "a",
-    submenuItemSelector = "",
-    submenuToggleSelector = "a",
-    submenuSelector = "ul",
+    menuItemSelector = ".nav-item",
+    menuLinkSelector = ".nav-link,.dropdown-item",
+    submenuItemSelector = ".dropdown",
+    submenuToggleSelector = ".dropdown-toggle",
+    submenuSelector = ".dropdown-menu",
     controllerElement = null,
     containerElement = null,
     openClass = "show",
-    closeClass = "",
+    closeClass = "collapse",
     isTopLevel = true,
     parentMenu = null,
     hoverType = "off",
@@ -62,10 +86,6 @@ class Bootstrap4Menubar extends Menubar {
       hoverDelay,
       initialize: false,
     });
-
-    this.MenuType = Bootstrap4Menubar;
-    this.MenuItemType = Bootstrap4MenubarItem;
-    this.MenuToggleType = Bootstrap4MenubarToggle;
 
     if (initialize) {
       this.initialize();
