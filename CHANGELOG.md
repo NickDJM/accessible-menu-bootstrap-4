@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-alpha.4](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2021-07-23)
+
+
+### Bug Fixes
+
+* **menus:** update event names ([f8f6512](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/f8f6512fc2790311009fb60d156dee1a5156fb61))
+
 ## [1.0.0-alpha.3](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-07-23)
 
 
