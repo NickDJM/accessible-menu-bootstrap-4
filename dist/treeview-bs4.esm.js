@@ -1752,7 +1752,7 @@ var Bootstrap4TreeviewToggle = function (_TreeviewToggle) {
         }
       }
       if (emit) {
-        this.dom.toggle.dispatchEvent(this.expandEvent);
+        this.dom.toggle.dispatchEvent(this._expandEvent);
       }
     }
   }, {
@@ -1780,7 +1780,7 @@ var Bootstrap4TreeviewToggle = function (_TreeviewToggle) {
         }
       }
       if (emit) {
-        this.dom.toggle.dispatchEvent(this.collapseEvent);
+        this.dom.toggle.dispatchEvent(this._collapseEvent);
       }
     }
   }]);

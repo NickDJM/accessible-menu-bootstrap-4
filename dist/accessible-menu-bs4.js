@@ -1678,7 +1678,7 @@ var AccessibleMenuBootstrap4 = (function () {
           }
         }
         if (emit) {
-          this.dom.toggle.dispatchEvent(this.expandEvent);
+          this.dom.toggle.dispatchEvent(this._expandEvent);
         }
       }
     }, {
@@ -1706,7 +1706,7 @@ var AccessibleMenuBootstrap4 = (function () {
           }
         }
         if (emit) {
-          this.dom.toggle.dispatchEvent(this.collapseEvent);
+          this.dom.toggle.dispatchEvent(this._collapseEvent);
         }
       }
     }]);
@@ -2400,7 +2400,7 @@ var AccessibleMenuBootstrap4 = (function () {
           }
         }
         if (emit) {
-          this.dom.toggle.dispatchEvent(this.expandEvent);
+          this.dom.toggle.dispatchEvent(this._expandEvent);
         }
       }
     }, {
@@ -2428,7 +2428,7 @@ var AccessibleMenuBootstrap4 = (function () {
           }
         }
         if (emit) {
-          this.dom.toggle.dispatchEvent(this.collapseEvent);
+          this.dom.toggle.dispatchEvent(this._collapseEvent);
         }
       }
     }]);
@@ -3040,7 +3040,7 @@ var AccessibleMenuBootstrap4 = (function () {
           }
         }
         if (emit) {
-          this.dom.toggle.dispatchEvent(this.expandEvent);
+          this.dom.toggle.dispatchEvent(this._expandEvent);
         }
       }
     }, {
@@ -3068,7 +3068,7 @@ var AccessibleMenuBootstrap4 = (function () {
           }
         }
         if (emit) {
-          this.dom.toggle.dispatchEvent(this.collapseEvent);
+          this.dom.toggle.dispatchEvent(this._collapseEvent);
         }
       }
     }]);

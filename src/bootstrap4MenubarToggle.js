@@ -108,7 +108,7 @@ class Bootstrap4MenubarToggle extends MenubarToggle {
     }
 
     if (emit) {
-      this.dom.toggle.dispatchEvent(this.expandEvent);
+      this.dom.toggle.dispatchEvent(this._expandEvent);
     }
   }
 
@@ -143,7 +143,7 @@ class Bootstrap4MenubarToggle extends MenubarToggle {
     }
 
     if (emit) {
-      this.dom.toggle.dispatchEvent(this.collapseEvent);
+      this.dom.toggle.dispatchEvent(this._collapseEvent);
     }
   }
 }

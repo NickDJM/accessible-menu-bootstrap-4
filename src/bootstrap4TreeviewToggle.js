@@ -97,7 +97,7 @@ class Bootstrap4TreeviewToggle extends TreeviewToggle {
     }
 
     if (emit) {
-      this.dom.toggle.dispatchEvent(this.expandEvent);
+      this.dom.toggle.dispatchEvent(this._expandEvent);
     }
   }
 
@@ -132,7 +132,7 @@ class Bootstrap4TreeviewToggle extends TreeviewToggle {
     }
 
     if (emit) {
-      this.dom.toggle.dispatchEvent(this.collapseEvent);
+      this.dom.toggle.dispatchEvent(this._collapseEvent);
     }
   }
 }
