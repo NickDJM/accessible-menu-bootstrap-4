@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-alpha.5](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2021-07-26)
+
+
+### Bug Fixes
+
+* **menus:** do not remove close class when opening ([986462e](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/986462e8bf54914fcaeb2d4cd9f3bfb281f5b26e))
+
 ## [1.0.0-alpha.4](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2021-07-23)
 
 
