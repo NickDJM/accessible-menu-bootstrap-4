@@ -85,7 +85,7 @@ class Bootstrap4DisclosureMenuToggle extends DisclosureMenuToggle {
    * @param {boolean} [emit = true] - A toggle to emit the expand event once expanded.
    */
   expand(emit = true) {
-    const { closeClass, openClass } = this.elements.controlledMenu;
+    const { openClass } = this.elements.controlledMenu;
 
     this.dom.toggle.setAttribute("aria-expanded", "true");
 
@@ -95,15 +95,6 @@ class Bootstrap4DisclosureMenuToggle extends DisclosureMenuToggle {
         this.dom.container.classList.add(openClass);
       } else {
         this.dom.container.classList.add(...openClass);
-      }
-    }
-
-    // Remove the close class.
-    if (closeClass !== "") {
-      if (typeof closeClass === "string") {
-        this.dom.container.classList.remove(closeClass);
-      } else {
-        this.dom.container.classList.remove(...closeClass);
       }
     }
 
