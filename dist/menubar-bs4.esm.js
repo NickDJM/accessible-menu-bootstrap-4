@@ -1810,9 +1810,7 @@ var Bootstrap4MenubarToggle = function (_MenubarToggle) {
     key: "expand",
     value: function expand() {
       var emit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var _this$elements$contro = this.elements.controlledMenu,
-          closeClass = _this$elements$contro.closeClass,
-          openClass = _this$elements$contro.openClass;
+      var openClass = this.elements.controlledMenu.openClass;
       this.dom.toggle.setAttribute("aria-expanded", "true");
       if (openClass !== "") {
         if (typeof openClass === "string") {
@@ -1820,14 +1818,6 @@ var Bootstrap4MenubarToggle = function (_MenubarToggle) {
         } else {
           var _this$dom$container$c;
           (_this$dom$container$c = this.dom.container.classList).add.apply(_this$dom$container$c, _toConsumableArray(openClass));
-        }
-      }
-      if (closeClass !== "") {
-        if (typeof closeClass === "string") {
-          this.dom.container.classList.remove(closeClass);
-        } else {
-          var _this$dom$container$c2;
-          (_this$dom$container$c2 = this.dom.container.classList).remove.apply(_this$dom$container$c2, _toConsumableArray(closeClass));
         }
       }
       if (emit) {
@@ -1838,24 +1828,24 @@ var Bootstrap4MenubarToggle = function (_MenubarToggle) {
     key: "collapse",
     value: function collapse() {
       var emit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var _this$elements$contro2 = this.elements.controlledMenu,
-          closeClass = _this$elements$contro2.closeClass,
-          openClass = _this$elements$contro2.openClass;
+      var _this$elements$contro = this.elements.controlledMenu,
+          closeClass = _this$elements$contro.closeClass,
+          openClass = _this$elements$contro.openClass;
       this.dom.toggle.setAttribute("aria-expanded", "false");
       if (closeClass !== "") {
         if (typeof closeClass === "string") {
           this.dom.container.classList.add(closeClass);
         } else {
-          var _this$dom$container$c3;
-          (_this$dom$container$c3 = this.dom.container.classList).add.apply(_this$dom$container$c3, _toConsumableArray(closeClass));
+          var _this$dom$container$c2;
+          (_this$dom$container$c2 = this.dom.container.classList).add.apply(_this$dom$container$c2, _toConsumableArray(closeClass));
         }
       }
       if (openClass !== "") {
         if (typeof openClass === "string") {
           this.dom.container.classList.remove(openClass);
         } else {
-          var _this$dom$container$c4;
-          (_this$dom$container$c4 = this.dom.container.classList).remove.apply(_this$dom$container$c4, _toConsumableArray(openClass));
+          var _this$dom$container$c3;
+          (_this$dom$container$c3 = this.dom.container.classList).remove.apply(_this$dom$container$c3, _toConsumableArray(openClass));
         }
       }
       if (emit) {
