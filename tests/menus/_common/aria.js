@@ -36,7 +36,7 @@ export function aria(MenuClass) {
       expect(menu.dom.menu.getAttribute("aria-labelledby")).toBe("toggle-0");
 
       if (menuType === "Bootstrap4Menubar") {
-        expect(menu.dom.menu.getAttribute("role")).toBe("Bootstrap4Menubar");
+        expect(menu.dom.menu.getAttribute("role")).toBe("menubar");
       } else if (menuType === "Bootstrap4Treeview") {
         expect(menu.dom.menu.getAttribute("role")).toBe("tree");
       }
@@ -80,7 +80,7 @@ export function aria(MenuClass) {
         );
 
         if (menuType === "Bootstrap4Menubar") {
-          expect(submenuElement.getAttribute("role")).toBe("Bootstrap4Menubar");
+          expect(submenuElement.getAttribute("role")).toBe("menubar");
         } else if (menuType === "Bootstrap4Treeview") {
           expect(submenuElement.getAttribute("role")).toBe("group");
         }

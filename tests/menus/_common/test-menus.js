@@ -2,7 +2,7 @@ export const oneLevelMenu = `
 <header>
   <nav class="navbar">
     <button id="toggle-0" class="navbar-toggler">Menu Toggle</button>
-    <div class="navbar-collapse">
+    <div class="collapse navbar-collapse">
       <ul id="menu-0" class="navbar-nav">
         <li id="item-1-0-0" class="nav-item"><a id="link-1-0-0" class="nav-link" href="#">First item</a></li>
         <li id="item-2-0-0" class="nav-item"><a id="link-2-0-0" class="nav-link" href="#">Second item</a></li>
@@ -20,7 +20,7 @@ export const twoLevelMenu = `
 <header>
   <nav class="navbar">
     <button id="toggle-0" class="navbar-toggler">Menu Toggle</button>
-    <div class="navbar-collapse">
+    <div class="collapse navbar-collapse">
       <ul id="menu-0" class="navbar-nav">
         <li id="item-1-0-0" class="nav-item"><a id="link-1-0-0" class="nav-link" href="#">First item</a></li>
         <li id="item-2-0-0" class="nav-item dropdown">
@@ -59,7 +59,7 @@ export const fullMenu = `
 <header>
   <nav class="navbar">
     <button id="toggle-0" class="navbar-toggler">Menu Toggle</button>
-    <div class="navbar-collapse">
+    <div class="collapse navbar-collapse">
       <ul id="menu-0" class="navbar-nav">
         <li id="item-1-0-0" class="nav-item"><a id="link-1-0-0" class="nav-link" href="#">First item</a></li>
         <li id="item-2-0-0" class="nav-item dropdown">
