@@ -31,7 +31,6 @@ describe("Bootstrap4Menubar keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
       const { controlledMenu } = toggle.elements;
@@ -61,7 +60,6 @@ describe("Bootstrap4Menubar keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         containerElement: document.querySelector("nav"),
         controllerElement: document.querySelector("#toggle-0"),
       });
@@ -86,7 +84,6 @@ describe("Bootstrap4Menubar keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -104,7 +101,6 @@ describe("Bootstrap4Menubar keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -129,7 +125,6 @@ describe("Bootstrap4Menubar keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -150,7 +145,6 @@ describe("Bootstrap4Menubar keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -172,7 +166,6 @@ describe("Bootstrap4Menubar keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
       const toggle = menu.elements.submenuToggles[0];
@@ -203,7 +196,6 @@ describe("Bootstrap4Menubar keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
       const toggle = menu.elements.submenuToggles[0];
@@ -234,7 +226,6 @@ describe("Bootstrap4Menubar keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -259,7 +250,6 @@ describe("Bootstrap4Menubar keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -281,7 +271,6 @@ describe("Bootstrap4Menubar keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -299,7 +288,6 @@ describe("Bootstrap4Menubar keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -324,7 +312,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
       const { controlledMenu } = toggle.elements;
@@ -358,7 +345,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
       const { controlledMenu } = toggle.elements;
@@ -387,7 +373,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
       const { controlledMenu } = toggle.elements;
@@ -414,7 +399,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const originalToggle = menu.elements.submenuToggles[0];
       const newToggle = menu.elements.submenuToggles[1];
@@ -445,7 +429,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
       const { controlledMenu } = toggle.elements;
@@ -474,7 +457,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const originalToggle = menu.elements.submenuToggles[1];
       const newToggle = menu.elements.submenuToggles[0];
@@ -505,7 +487,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
       const toggle = menu.elements.submenuToggles[0];
@@ -530,7 +511,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
       const toggle = menu.elements.submenuToggles[0];
@@ -559,7 +539,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
       const toggle = menu.elements.submenuToggles[0];
@@ -584,7 +563,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
       const toggle = menu.elements.submenuToggles[0];
@@ -613,7 +591,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
       const toggle = menu.elements.submenuToggles[0];
@@ -642,7 +619,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
       const toggle = menu.elements.submenuToggles[0];
@@ -671,7 +647,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
       const toggle = menu.elements.submenuToggles[0];
@@ -696,7 +671,6 @@ describe("Bootstrap4Menubar submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Menubar({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
       const toggle = menu.elements.submenuToggles[0];

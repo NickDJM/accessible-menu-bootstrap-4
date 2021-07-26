@@ -30,7 +30,6 @@ describe("Bootstrap4DisclosureMenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4DisclosureMenu({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
 
@@ -55,7 +54,6 @@ describe("Bootstrap4DisclosureMenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4DisclosureMenu({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
 
@@ -77,7 +75,6 @@ describe("Bootstrap4DisclosureMenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4DisclosureMenu({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         containerElement: document.querySelector("nav"),
         controllerElement: document.querySelector("#toggle-0"),
       });
@@ -102,7 +99,6 @@ describe("Bootstrap4DisclosureMenu optional keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4DisclosureMenu({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -123,7 +119,6 @@ describe("Bootstrap4DisclosureMenu optional keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4DisclosureMenu({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
       const toggle = menu.elements.submenuToggles[0];
@@ -149,7 +144,6 @@ describe("Bootstrap4DisclosureMenu optional keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4DisclosureMenu({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -169,7 +163,6 @@ describe("Bootstrap4DisclosureMenu optional keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4DisclosureMenu({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -194,7 +187,6 @@ describe("Bootstrap4DisclosureMenu optional keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4DisclosureMenu({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -219,7 +211,6 @@ describe("Bootstrap4DisclosureMenu optional keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4DisclosureMenu({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         optionalKeySupport: true,
       });
 
@@ -243,7 +234,6 @@ describe("Bootstrap4DisclosureMenu submenu keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4DisclosureMenu({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
       const submenu = toggle.elements.controlledMenu;
