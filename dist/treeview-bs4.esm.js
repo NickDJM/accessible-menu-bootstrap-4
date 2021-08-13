@@ -247,7 +247,7 @@ var BaseMenuToggle = function () {
       }
       this.elements.controlledMenu.dom.menu.setAttribute("aria-labelledby", this.dom.toggle.id);
       this.dom.toggle.setAttribute("aria-controls", this.elements.controlledMenu.dom.menu.id);
-      this.collapse(false);
+      this._collapse(false);
     }
   }, {
     key: "dom",
@@ -271,8 +271,8 @@ var BaseMenuToggle = function () {
       this._open = value;
     }
   }, {
-    key: "expand",
-    value: function expand() {
+    key: "_expand",
+    value: function _expand() {
       var emit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var _this$elements$contro = this.elements.controlledMenu,
           closeClass = _this$elements$contro.closeClass,
@@ -299,8 +299,8 @@ var BaseMenuToggle = function () {
       }
     }
   }, {
-    key: "collapse",
-    value: function collapse() {
+    key: "_collapse",
+    value: function _collapse() {
       var emit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var _this$elements$contro4 = this.elements.controlledMenu,
           closeClass = _this$elements$contro4.closeClass,
@@ -330,7 +330,7 @@ var BaseMenuToggle = function () {
     key: "open",
     value: function open() {
       this.elements.controlledMenu.focusState = "self";
-      this.expand();
+      this._expand();
       this.isOpen = true;
     }
   }, {
@@ -339,7 +339,7 @@ var BaseMenuToggle = function () {
       if (this.elements.parentMenu) {
         this.elements.parentMenu.focusState = "self";
       }
-      this.expand();
+      this._expand();
       this.isOpen = true;
     }
   }, {
@@ -351,7 +351,7 @@ var BaseMenuToggle = function () {
         if (this.elements.parentMenu) {
           this.elements.parentMenu.focusState = "self";
         }
-        this.collapse();
+        this._collapse();
         this.isOpen = false;
       }
     }
@@ -579,11 +579,11 @@ var BaseMenu = function () {
   _createClass$3(BaseMenu, [{
     key: "initialize",
     value: function initialize() {
-      if (!this.validate()) {
+      if (!this._validate()) {
         throw new Error("AccesibleMenu: cannot initialize menu. See other error messages for more information.");
       }
-      if (this.elements.rootMenu === null) this.findRootMenu(this);
-      this.setDOMElements();
+      if (this.elements.rootMenu === null) this._findRootMenu(this);
+      this._setDOMElements();
       if (this.isTopLevel) {
         if (this.dom.controller && this.dom.container) {
           var toggle = new this._MenuToggleType({
@@ -594,7 +594,7 @@ var BaseMenu = function () {
           this._elements.controller = toggle;
         }
       }
-      this.createChildElements();
+      this._createChildElements();
     }
   }, {
     key: "dom",
@@ -610,6 +610,11 @@ var BaseMenu = function () {
     key: "elements",
     get: function get() {
       return this._elements;
+    }
+  }, {
+    key: "isTopLevel",
+    get: function get() {
+      return this._root;
     }
   }, {
     key: "openClass",
@@ -638,11 +643,6 @@ var BaseMenu = function () {
       if (this._closeClass !== value) {
         this._closeClass = value;
       }
-    }
-  }, {
-    key: "isTopLevel",
-    get: function get() {
-      return this._root;
     }
   }, {
     key: "currentChild",
@@ -768,8 +768,8 @@ var BaseMenu = function () {
       return check;
     }
   }, {
-    key: "validate",
-    value: function validate() {
+    key: "_validate",
+    value: function _validate() {
       var check = true;
       if (this._dom.container !== null || this._dom.controller !== null) {
         if (!isValidInstance(HTMLElement, {
@@ -833,106 +833,71 @@ var BaseMenu = function () {
       return check;
     }
   }, {
-    key: "setDOMElementType",
-    value: function setDOMElementType(elementType, base, filter) {
+    key: "_setDOMElementType",
+    value: function _setDOMElementType(elementType) {
+      var base = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.dom.menu;
+      var overwrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       if (typeof this.selectors[elementType] === "string") {
-        if (base) isValidInstance(HTMLElement, {
+        if (!Array.isArray(this.dom[elementType])) {
+          throw new Error("AccessibleMenu: The \"".concat(elementType, "\" element cannot be set through _setDOMElementType."));
+        }
+        if (base !== this.dom.menu) isValidInstance(HTMLElement, {
           base: base
         });
-        var baseElement = base || this.dom.menu;
-        var baseFilter = function baseFilter(item) {
-          return item.parentElement === baseElement;
-        };
-        var selector = this.selectors[elementType];
-        var domElements = Array.from(baseElement.querySelectorAll(selector));
-        if (typeof filter !== "undefined") {
-          if (typeof filter === "function") {
-            this._dom[elementType] = domElements.filter(function (item) {
-              return filter(item);
-            });
-          } else {
-            this._dom[elementType] = domElements;
-          }
+        var domElements = Array.from(base.querySelectorAll(this.selectors[elementType]));
+        var filteredElements = domElements.filter(function (item) {
+          return item.parentElement === base;
+        });
+        if (overwrite) {
+          this._dom[elementType] = filteredElements;
         } else {
-          this._dom[elementType] = domElements.filter(function (item) {
-            return baseFilter(item);
-          });
+          this._dom[elementType] = [].concat(_toConsumableArray$2(this._dom[elementType]), _toConsumableArray$2(filteredElements));
         }
       } else {
-        throw new Error("".concat(elementType, " is not a valid element type within the menu."));
+        throw new Error("AccessibleMenu: \"".concat(elementType, "\" is not a valid element type within the menu."));
       }
     }
   }, {
-    key: "addDOMElementType",
-    value: function addDOMElementType(elementType, base, filter) {
-      if (typeof this.selectors[elementType] === "string") {
-        if (base) isValidInstance(HTMLElement, {
-          base: base
-        });
-        var baseElement = base || this.dom.menu;
-        var baseFilter = function baseFilter(item) {
-          return item.parentElement === baseElement;
-        };
-        var selector = this.selectors[elementType];
-        var domElements = Array.from(baseElement.querySelectorAll(selector));
-        if (typeof filter !== "undefined") {
-          if (typeof filter === "function") {
-            this._dom[elementType] = [].concat(_toConsumableArray$2(this._dom[elementType]), _toConsumableArray$2(domElements.filter(function (item) {
-              return filter(item);
-            })));
-          } else {
-            this._dom[elementType] = [].concat(_toConsumableArray$2(this._dom[elementType]), _toConsumableArray$2(domElements));
-          }
-        } else {
-          this._dom[elementType] = [].concat(_toConsumableArray$2(this._dom[elementType]), _toConsumableArray$2(domElements.filter(function (item) {
-            return baseFilter(item);
-          })));
+    key: "_resetDOMElementType",
+    value: function _resetDOMElementType(elementType) {
+      if (typeof this.dom[elementType] !== "undefined") {
+        if (!Array.isArray(this.dom[elementType])) {
+          throw new Error("AccessibleMenu: The \"".concat(elementType, "\" element cannot be reset through _resetDOMElementType."));
         }
-      } else {
-        throw new Error("".concat(elementType, " is not a valid element type within the menu."));
-      }
-    }
-  }, {
-    key: "clearDOMElementType",
-    value: function clearDOMElementType(elementType) {
-      if (elementType === "menu") return;
-      if (Array.isArray(this._dom[elementType])) {
         this._dom[elementType] = [];
-      } else if (typeof this._dom[elementType] !== "undefined") {
-        this._dom[elementType] = null;
       } else {
-        throw new Error("".concat(elementType, " is not a valid element type within the menu."));
+        throw new Error("AccessibleMenu: \"".concat(elementType, "\" is not a valid element type within the menu."));
       }
     }
   }, {
-    key: "setDOMElements",
-    value: function setDOMElements() {
+    key: "_setDOMElements",
+    value: function _setDOMElements() {
       var _this = this;
-      this.setDOMElementType("menuItems");
+      this._setDOMElementType("menuItems");
       if (this.selectors.submenuItems !== "") {
-        this.setDOMElementType("submenuItems");
-        this.clearDOMElementType("submenuToggles");
-        this.clearDOMElementType("submenus");
+        this._setDOMElementType("submenuItems");
+        this._resetDOMElementType("submenuToggles");
+        this._resetDOMElementType("submenus");
         this.dom.submenuItems.forEach(function (item) {
-          _this.addDOMElementType("submenuToggles", item);
-          _this.addDOMElementType("submenus", item);
+          _this._setDOMElementType("submenuToggles", item, false);
+          _this._setDOMElementType("submenus", item, false);
         });
       }
     }
   }, {
-    key: "findRootMenu",
-    value: function findRootMenu(menu) {
+    key: "_findRootMenu",
+    value: function _findRootMenu(menu) {
       if (menu.isTopLevel) {
         this._elements.rootMenu = menu;
       } else if (menu.elements.parentMenu !== null) {
-        this.findRootMenu(menu.elements.parentMenu);
+        this._findRootMenu(menu.elements.parentMenu);
       } else {
         throw new Error("Cannot find root menu.");
       }
     }
   }, {
-    key: "createChildElements",
-    value: function createChildElements() {
+    key: "_createChildElements",
+    value: function _createChildElements() {
       var _this2 = this;
       this.dom.menuItems.forEach(function (element) {
         var menuItem;
@@ -980,8 +945,8 @@ var BaseMenu = function () {
       });
     }
   }, {
-    key: "handleFocus",
-    value: function handleFocus() {
+    key: "_handleFocus",
+    value: function _handleFocus() {
       var _this3 = this;
       this.elements.menuItems.forEach(function (menuItem, index) {
         menuItem.dom.link.addEventListener("focus", function () {
@@ -991,8 +956,8 @@ var BaseMenu = function () {
       });
     }
   }, {
-    key: "handleClick",
-    value: function handleClick() {
+    key: "_handleClick",
+    value: function _handleClick() {
       var _this4 = this;
       var startEventType = isEventSupported("touchstart", this.dom.menu) ? "touchstart" : "mousedown";
       var endEventType = isEventSupported("touchend", this.dom.menu) ? "touchend" : "mouseup";
@@ -1025,8 +990,8 @@ var BaseMenu = function () {
       }
     }
   }, {
-    key: "handleHover",
-    value: function handleHover() {
+    key: "_handleHover",
+    value: function _handleHover() {
       var _this5 = this;
       this.elements.menuItems.forEach(function (menuItem, index) {
         menuItem.dom.link.addEventListener("mouseenter", function () {
@@ -1083,8 +1048,8 @@ var BaseMenu = function () {
       });
     }
   }, {
-    key: "handleKeydown",
-    value: function handleKeydown() {
+    key: "_handleKeydown",
+    value: function _handleKeydown() {
       var _this6 = this;
       if (this.isTopLevel && this.elements.controller) {
         this.elements.controller.dom.toggle.addEventListener("keydown", function (event) {
@@ -1097,8 +1062,8 @@ var BaseMenu = function () {
       }
     }
   }, {
-    key: "handleKeyup",
-    value: function handleKeyup() {
+    key: "_handleKeyup",
+    value: function _handleKeyup() {
       var _this7 = this;
       if (this.isTopLevel && this.elements.controller) {
         this.elements.controller.dom.toggle.addEventListener("keyup", function (event) {
@@ -1229,7 +1194,7 @@ function _superPropBase$2(object, property) { while (!Object.prototype.hasOwnPro
 function _inherits$5(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf$5(subClass, superClass); }
 function _setPrototypeOf$5(o, p) { _setPrototypeOf$5 = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf$5(o, p); }
 function _createSuper$5(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$5(); return function _createSuperInternal() { var Super = _getPrototypeOf$5(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf$5(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn$5(this, result); }; }
-function _possibleConstructorReturn$5(self, call) { if (call && (_typeof$5(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized$5(self); }
+function _possibleConstructorReturn$5(self, call) { if (call && (_typeof$5(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized$5(self); }
 function _assertThisInitialized$5(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct$5() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf$5(o) { _getPrototypeOf$5 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf$5(o); }
@@ -1292,7 +1257,7 @@ function _classCallCheck$4(instance, Constructor) { if (!(instance instanceof Co
 function _inherits$4(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf$4(subClass, superClass); }
 function _setPrototypeOf$4(o, p) { _setPrototypeOf$4 = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf$4(o, p); }
 function _createSuper$4(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$4(); return function _createSuperInternal() { var Super = _getPrototypeOf$4(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf$4(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn$4(this, result); }; }
-function _possibleConstructorReturn$4(self, call) { if (call && (_typeof$4(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized$4(self); }
+function _possibleConstructorReturn$4(self, call) { if (call && (_typeof$4(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized$4(self); }
 function _assertThisInitialized$4(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct$4() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf$4(o) { _getPrototypeOf$4 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf$4(o); }
@@ -1338,7 +1303,7 @@ function _superPropBase$1(object, property) { while (!Object.prototype.hasOwnPro
 function _inherits$3(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf$3(subClass, superClass); }
 function _setPrototypeOf$3(o, p) { _setPrototypeOf$3 = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf$3(o, p); }
 function _createSuper$3(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$3(); return function _createSuperInternal() { var Super = _getPrototypeOf$3(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf$3(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn$3(this, result); }; }
-function _possibleConstructorReturn$3(self, call) { if (call && (_typeof$3(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized$3(self); }
+function _possibleConstructorReturn$3(self, call) { if (call && (_typeof$3(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized$3(self); }
 function _assertThisInitialized$3(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct$3() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf$3(o) { _getPrototypeOf$3 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf$3(o); }
@@ -1413,20 +1378,20 @@ var Treeview = function (_BaseMenu) {
         } else {
           this.dom.menu.setAttribute("role", "group");
         }
-        this.handleFocus();
-        this.handleClick();
-        this.handleHover();
-        this.handleKeydown();
-        this.handleKeyup();
+        this._handleFocus();
+        this._handleClick();
+        this._handleHover();
+        this._handleKeydown();
+        this._handleKeyup();
       } catch (error) {
         console.error(error);
       }
     }
   }, {
-    key: "handleKeydown",
-    value: function handleKeydown() {
+    key: "_handleKeydown",
+    value: function _handleKeydown() {
       var _this2 = this;
-      _get$1(_getPrototypeOf$3(Treeview.prototype), "handleKeydown", this).call(this);
+      _get$1(_getPrototypeOf$3(Treeview.prototype), "_handleKeydown", this).call(this);
       this.dom.menu.addEventListener("keydown", function (event) {
         _this2.currentEvent = "keyboard";
         var key = keyPress(event);
@@ -1452,10 +1417,10 @@ var Treeview = function (_BaseMenu) {
       });
     }
   }, {
-    key: "handleKeyup",
-    value: function handleKeyup() {
+    key: "_handleKeyup",
+    value: function _handleKeyup() {
       var _this3 = this;
-      _get$1(_getPrototypeOf$3(Treeview.prototype), "handleKeyup", this).call(this);
+      _get$1(_getPrototypeOf$3(Treeview.prototype), "_handleKeyup", this).call(this);
       this.dom.menu.addEventListener("keyup", function (event) {
         _this3.currentEvent = "keyboard";
         var key = keyPress(event);
@@ -1635,7 +1600,7 @@ function _classCallCheck$2(instance, Constructor) { if (!(instance instanceof Co
 function _inherits$2(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf$2(subClass, superClass); }
 function _setPrototypeOf$2(o, p) { _setPrototypeOf$2 = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf$2(o, p); }
 function _createSuper$2(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$2(); return function _createSuperInternal() { var Super = _getPrototypeOf$2(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf$2(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn$2(this, result); }; }
-function _possibleConstructorReturn$2(self, call) { if (call && (_typeof$2(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized$2(self); }
+function _possibleConstructorReturn$2(self, call) { if (call && (_typeof$2(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized$2(self); }
 function _assertThisInitialized$2(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct$2() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf$2(o) { _getPrototypeOf$2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf$2(o); }
@@ -1688,7 +1653,7 @@ function _superPropBase(object, property) { while (!Object.prototype.hasOwnPrope
 function _inherits$1(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf$1(subClass, superClass); }
 function _setPrototypeOf$1(o, p) { _setPrototypeOf$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf$1(o, p); }
 function _createSuper$1(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$1(); return function _createSuperInternal() { var Super = _getPrototypeOf$1(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf$1(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn$1(this, result); }; }
-function _possibleConstructorReturn$1(self, call) { if (call && (_typeof$1(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized$1(self); }
+function _possibleConstructorReturn$1(self, call) { if (call && (_typeof$1(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized$1(self); }
 function _assertThisInitialized$1(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf$1(o) { _getPrototypeOf$1 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf$1(o); }
@@ -1738,8 +1703,8 @@ var Bootstrap4TreeviewToggle = function (_TreeviewToggle) {
       }
     }
   }, {
-    key: "expand",
-    value: function expand() {
+    key: "_expand",
+    value: function _expand() {
       var emit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var openClass = this.elements.controlledMenu.openClass;
       this.dom.toggle.setAttribute("aria-expanded", "true");
@@ -1756,8 +1721,8 @@ var Bootstrap4TreeviewToggle = function (_TreeviewToggle) {
       }
     }
   }, {
-    key: "collapse",
-    value: function collapse() {
+    key: "_collapse",
+    value: function _collapse() {
       var emit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var _this$elements$contro = this.elements.controlledMenu,
           closeClass = _this$elements$contro.closeClass,
@@ -1792,7 +1757,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
@@ -1860,5 +1825,5 @@ var Bootstrap4Treeview = function (_Treeview) {
   return Bootstrap4Treeview;
 }(Treeview);
 
-export default Bootstrap4Treeview;
+export { Bootstrap4Treeview as default };
 //# sourceMappingURL=treeview-bs4.esm.js.map
