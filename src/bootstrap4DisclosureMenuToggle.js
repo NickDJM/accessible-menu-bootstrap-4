@@ -66,8 +66,6 @@ class Bootstrap4DisclosureMenuToggle extends DisclosureMenuToggle {
   initialize() {
     super.initialize();
 
-    this.dom.container.classList.add("collapse");
-
     if (this.dom.toggle.hasAttribute("data-toggle")) {
       this.dom.toggle.removeAttribute("data-toggle");
     }
@@ -84,7 +82,7 @@ class Bootstrap4DisclosureMenuToggle extends DisclosureMenuToggle {
    *
    * @param {boolean} [emit = true] - A toggle to emit the expand event once expanded.
    */
-  expand(emit = true) {
+  _expand(emit = true) {
     const { openClass } = this.elements.controlledMenu;
 
     this.dom.toggle.setAttribute("aria-expanded", "true");
@@ -110,7 +108,7 @@ class Bootstrap4DisclosureMenuToggle extends DisclosureMenuToggle {
    *
    * @param {boolean} [emit = true] - A toggle to emit the collapse event once collapsed.
    */
-  collapse(emit = true) {
+  _collapse(emit = true) {
     const { closeClass, openClass } = this.elements.controlledMenu;
 
     this.dom.toggle.setAttribute("aria-expanded", "false");
