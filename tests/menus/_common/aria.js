@@ -20,7 +20,6 @@ export function aria(MenuClass) {
     document.body.innerHTML = twoLevelMenu;
     const menu = new MenuClass({
       menuElement: document.querySelector("#menu-0"),
-      submenuItemSelector: "li.dropdown",
       containerElement: document.querySelector("nav"),
       controllerElement: document.querySelector("#toggle-0"),
     });

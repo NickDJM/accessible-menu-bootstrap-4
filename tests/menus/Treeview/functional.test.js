@@ -172,7 +172,7 @@ describe("Bootstrap4Treeview keypress tests", () => {
         ).toBeTrue();
         expect(
           subControlledMenu.dom.menu.classList.contains("collapse")
-        ).toBeFalse();
+        ).toBeTrue();
 
         toggleIsPreviewed(toggle);
         expect(menu.currentChild).toBe(2);
