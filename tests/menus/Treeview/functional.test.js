@@ -31,7 +31,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Treeview({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
 
@@ -52,7 +51,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Treeview({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
 
@@ -79,7 +77,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
 
         // Enter the menu.
@@ -96,7 +93,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
         const toggle = menu.elements.submenuToggles[0];
         const { controlledMenu } = toggle.elements;
@@ -120,7 +116,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
         const toggle = menu.elements.submenuToggles[0];
         const { controlledMenu } = toggle.elements;
@@ -145,7 +140,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
         const toggle = menu.elements.submenuToggles[0];
         const { controlledMenu } = toggle.elements;
@@ -178,7 +172,7 @@ describe("Bootstrap4Treeview keypress tests", () => {
         ).toBeTrue();
         expect(
           subControlledMenu.dom.menu.classList.contains("collapse")
-        ).toBeFalse();
+        ).toBeTrue();
 
         toggleIsPreviewed(toggle);
         expect(menu.currentChild).toBe(2);
@@ -190,7 +184,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Treeview({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
 
       // Enter the menu.
@@ -215,7 +208,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
 
         // Enter the menu.
@@ -235,7 +227,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
         const toggle = menu.elements.submenuToggles[0];
         const { controlledMenu } = toggle.elements;
@@ -260,7 +251,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
         const toggle = menu.elements.submenuToggles[0];
         const { controlledMenu } = toggle.elements;
@@ -285,7 +275,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
         const toggle = menu.elements.submenuToggles[0];
         const { controlledMenu } = toggle.elements;
@@ -316,7 +305,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Treeview({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
 
       // Enter the menu.
@@ -337,7 +325,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Treeview({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
 
@@ -358,7 +345,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Treeview({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
       const { controlledMenu } = toggle.elements;
@@ -386,7 +372,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Treeview({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
 
@@ -408,7 +393,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Treeview({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
       const { controlledMenu } = toggle.elements;
@@ -438,7 +422,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
 
         // Enter the menu.
@@ -458,7 +441,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
         const toggle = menu.elements.submenuToggles[0];
         const { controlledMenu } = toggle.elements;
@@ -483,7 +465,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
         const toggle = menu.elements.submenuToggles[0];
         const { controlledMenu } = toggle.elements;
@@ -518,7 +499,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
 
         // Enter the menu.
@@ -535,7 +515,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
         const toggle = menu.elements.submenuToggles[2];
         const { controlledMenu } = toggle.elements;
@@ -559,7 +538,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
         const toggle = menu.elements.submenuToggles[0];
         const { controlledMenu } = toggle.elements;
@@ -584,7 +562,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
         document.body.innerHTML = fullMenu;
         const menu = new Bootstrap4Treeview({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
         });
         const toggle = menu.elements.submenuToggles[0];
         const { controlledMenu } = toggle.elements;
@@ -618,7 +595,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Treeview({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
       const { controlledMenu } = toggle.elements;
@@ -661,7 +637,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Treeview({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
       const { controlledMenu } = toggle.elements;
@@ -689,7 +664,6 @@ describe("Bootstrap4Treeview keypress tests", () => {
       document.body.innerHTML = fullMenu;
       const menu = new Bootstrap4Treeview({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
 
       // Enter the menu.

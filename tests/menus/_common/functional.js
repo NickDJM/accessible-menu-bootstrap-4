@@ -29,7 +29,6 @@ export function openClose(MenuClass) {
       document.body.innerHTML = twoLevelMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         containerElement: document.querySelector("nav"),
         controllerElement: document.querySelector("#toggle-0"),
       });
@@ -46,7 +45,6 @@ export function openClose(MenuClass) {
       document.body.innerHTML = twoLevelMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         containerElement: document.querySelector("nav"),
         controllerElement: document.querySelector("#toggle-0"),
       });
@@ -63,7 +61,6 @@ export function openClose(MenuClass) {
       document.body.innerHTML = twoLevelMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
 
@@ -78,7 +75,6 @@ export function openClose(MenuClass) {
       document.body.innerHTML = twoLevelMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
 
@@ -107,7 +103,6 @@ export function clickTests(MenuClass) {
       document.body.innerHTML = twoLevelMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         containerElement: document.querySelector("nav"),
         controllerElement: document.querySelector("#toggle-0"),
       });
@@ -123,10 +118,14 @@ export function clickTests(MenuClass) {
       expect(controller.isOpen).toBeTrue();
       expect(controller.dom.toggle.getAttribute("aria-expanded")).toBe("true");
 
+      // Container expectations.
+      expect(controller.dom.container.classList.contains("show")).toBeTrue();
+      expect(
+        controller.dom.container.classList.contains("collapse")
+      ).toBeTrue();
+
       // Child menu expectations.
       expect(menu.focusState).toBe("none");
-      expect(menu.dom.menu.classList.contains("show")).toBeTrue();
-      expect(menu.dom.menu.classList.contains("collapse")).toBeFalse();
     });
 
     test("will close when the controller is clicked when the menu is open", () => {
@@ -134,7 +133,6 @@ export function clickTests(MenuClass) {
       document.body.innerHTML = twoLevelMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         containerElement: document.querySelector("nav"),
         controllerElement: document.querySelector("#toggle-0"),
       });
@@ -158,7 +156,6 @@ export function clickTests(MenuClass) {
         document.body.innerHTML = twoLevelMenu;
         const menu = new MenuClass({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
           containerElement: document.querySelector("nav"),
           controllerElement: document.querySelector("#toggle-0"),
         });
@@ -179,7 +176,6 @@ export function clickTests(MenuClass) {
       document.body.innerHTML = twoLevelMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
 
@@ -194,7 +190,6 @@ export function clickTests(MenuClass) {
       document.body.innerHTML = twoLevelMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
       });
       const toggle = menu.elements.submenuToggles[0];
       const { controlledMenu } = toggle.elements;
@@ -224,7 +219,6 @@ export function hoverTests(MenuClass) {
       document.body.innerHTML = twoLevelMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         hoverType: "on",
         hoverDelay: 0, // Set the hoverDelay to 0 so we don't have to worry about a setTimeout.
       });
@@ -241,7 +235,6 @@ export function hoverTests(MenuClass) {
       document.body.innerHTML = twoLevelMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         hoverType: "on",
         hoverDelay: 0, // Set the hoverDelay to 0 so we don't have to worry about a setTimeout.
       });
@@ -264,7 +257,6 @@ export function hoverTests(MenuClass) {
       document.body.innerHTML = fullMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         hoverType: "dynamic",
         hoverDelay: 0, // Set the hoverDelay to 0 so we don't have to worry about a setTimeout.
       });
@@ -284,7 +276,6 @@ export function hoverTests(MenuClass) {
       document.body.innerHTML = fullMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         hoverType: "dynamic",
         hoverDelay: 0, // Set the hoverDelay to 0 so we don't have to worry about a setTimeout.
       });
@@ -305,7 +296,6 @@ export function hoverTests(MenuClass) {
       document.body.innerHTML = fullMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         containerElement: document.querySelector("nav"),
         controllerElement: document.querySelector("#toggle-0"),
         hoverType: "dynamic",
@@ -337,7 +327,6 @@ export function hoverTests(MenuClass) {
       document.body.innerHTML = fullMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         containerElement: document.querySelector("nav"),
         controllerElement: document.querySelector("#toggle-0"),
         hoverType: "dynamic",
@@ -364,7 +353,6 @@ export function hoverTests(MenuClass) {
       document.body.innerHTML = fullMenu;
       const menu = new MenuClass({
         menuElement: document.querySelector("#menu-0"),
-        submenuItemSelector: "li.dropdown",
         containerElement: document.querySelector("nav"),
         controllerElement: document.querySelector("#toggle-0"),
         hoverType: "dynamic",
@@ -405,7 +393,6 @@ export function baseKeypressTests(MenuClass) {
         document.body.innerHTML = fullMenu;
         const menu = new MenuClass({
           menuElement: document.querySelector("#menu-0"),
-          submenuItemSelector: "li.dropdown",
           containerElement: document.querySelector("nav"),
           controllerElement: document.querySelector("#toggle-0"),
         });

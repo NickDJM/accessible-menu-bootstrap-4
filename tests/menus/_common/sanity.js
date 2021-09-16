@@ -26,11 +26,11 @@ export function singleLevelSanity(MenuClass) {
 
     describe("has correct dom selectors", () => {
       const defaultSelectors = [
-        { selector: "menuItems", value: "li" },
-        { selector: "menuLinks", value: "a" },
-        { selector: "submenuItems", value: "" },
-        { selector: "submenuToggles", value: "a" },
-        { selector: "submenus", value: "ul" },
+        { selector: "menuItems", value: ".nav-item" },
+        { selector: "menuLinks", value: ".nav-link,.dropdown-item" },
+        { selector: "submenuItems", value: ".dropdown" },
+        { selector: "submenuToggles", value: ".dropdown-toggle" },
+        { selector: "submenus", value: ".dropdown-menu" },
       ];
 
       test.each(defaultSelectors)("$selector", ({ selector, value }) => {
@@ -89,7 +89,7 @@ export function singleLevelSanity(MenuClass) {
     });
 
     test("has correct closed class", () => {
-      expect(menu.closeClass).toBe("hide");
+      expect(menu.closeClass).toBe("collapse");
     });
 
     test("is top level", () => {
@@ -97,7 +97,7 @@ export function singleLevelSanity(MenuClass) {
     });
 
     test("has correct current child", () => {
-      if (menuType === "DisclosureMenu") {
+      if (menuType === "Bootstrap4DisclosureMenu") {
         expect(menu.currentChild).toBe(-1);
       } else {
         expect(menu.currentChild).toBe(0);
@@ -113,7 +113,7 @@ export function singleLevelSanity(MenuClass) {
     });
 
     test("current menu item is correct", () => {
-      if (menuType === "DisclosureMenu") {
+      if (menuType === "Bootstrap4DisclosureMenu") {
         expect(menu.currentMenuItem).toBeNil();
       } else {
         expect(menu.currentMenuItem).toBe(menu.elements.menuItems[0]);
@@ -146,16 +146,14 @@ export function twoLevelSanity(MenuClass) {
     // Set up the DOM.
     document.body.innerHTML = twoLevelMenu;
     const menuElement = document.querySelector("#menu-0");
-    const submenuItemSelector = "li.dropdown";
+    const submenuItemSelector = ".dropdown";
     const containerElement = document.querySelector("nav");
     const controllerElement = document.querySelector("#toggle-0");
     const menuItems = Array.from(menuElement.querySelectorAll("li"));
-    const submenuItems = Array.from(
-      menuElement.querySelectorAll("li.dropdown")
-    );
+    const submenuItems = Array.from(menuElement.querySelectorAll(".dropdown"));
     const menuLinks = Array.from(menuElement.querySelectorAll("li a"));
     const submenuElements = Array.from(
-      menuElement.querySelectorAll("li.dropdown ul")
+      menuElement.querySelectorAll(".dropdown ul")
     );
 
     // Declare the menu.
@@ -168,11 +166,11 @@ export function twoLevelSanity(MenuClass) {
 
     describe("has correct dom selectors", () => {
       const defaultSelectors = [
-        { selector: "menuItems", value: "li" },
-        { selector: "menuLinks", value: "a" },
-        { selector: "submenuItems", value: "li.dropdown" },
-        { selector: "submenuToggles", value: "a" },
-        { selector: "submenus", value: "ul" },
+        { selector: "menuItems", value: ".nav-item" },
+        { selector: "menuLinks", value: ".nav-link,.dropdown-item" },
+        { selector: "submenuItems", value: ".dropdown" },
+        { selector: "submenuToggles", value: ".dropdown-toggle" },
+        { selector: "submenus", value: ".dropdown-menu" },
       ];
 
       test.each(defaultSelectors)("$selector", ({ selector, value }) => {
@@ -249,7 +247,7 @@ export function twoLevelSanity(MenuClass) {
     });
 
     test("has correct closed class", () => {
-      expect(menu.closeClass).toBe("hide");
+      expect(menu.closeClass).toBe("collapse");
     });
 
     test("is top level", () => {
@@ -257,7 +255,7 @@ export function twoLevelSanity(MenuClass) {
     });
 
     test("has correct current child", () => {
-      if (menuType === "DisclosureMenu") {
+      if (menuType === "Bootstrap4DisclosureMenu") {
         expect(menu.currentChild).toBe(-1);
       } else {
         expect(menu.currentChild).toBe(0);
@@ -273,7 +271,7 @@ export function twoLevelSanity(MenuClass) {
     });
 
     test("current menu item is correct", () => {
-      if (menuType === "DisclosureMenu") {
+      if (menuType === "Bootstrap4DisclosureMenu") {
         expect(menu.currentMenuItem).toBeNil();
       } else {
         expect(menu.currentMenuItem).toBe(menu.elements.menuItems[0]);
@@ -299,11 +297,11 @@ export function twoLevelSanity(MenuClass) {
       describe(`submenu ${index}`, () => {
         describe("has correct dom selectors", () => {
           const defaultSelectors = [
-            { selector: "menuItems", value: "li" },
-            { selector: "menuLinks", value: "a" },
-            { selector: "submenuItems", value: "li.dropdown" },
-            { selector: "submenuToggles", value: "a" },
-            { selector: "submenus", value: "ul" },
+            { selector: "menuItems", value: ".nav-item" },
+            { selector: "menuLinks", value: ".nav-link,.dropdown-item" },
+            { selector: "submenuItems", value: ".dropdown" },
+            { selector: "submenuToggles", value: ".dropdown-toggle" },
+            { selector: "submenus", value: ".dropdown-menu" },
           ];
 
           test.each(defaultSelectors)("$selector", ({ selector, value }) => {
@@ -367,7 +365,7 @@ export function twoLevelSanity(MenuClass) {
       });
 
       test("has correct closed class", () => {
-        expect(submenu.closeClass).toBe("hide");
+        expect(submenu.closeClass).toBe("collapse");
       });
 
       test("is _not_ top level", () => {
@@ -375,7 +373,7 @@ export function twoLevelSanity(MenuClass) {
       });
 
       test("has correct current child", () => {
-        if (menuType === "DisclosureMenu") {
+        if (menuType === "Bootstrap4DisclosureMenu") {
           expect(submenu.currentChild).toBe(-1);
         } else {
           expect(submenu.currentChild).toBe(0);
@@ -391,7 +389,7 @@ export function twoLevelSanity(MenuClass) {
       });
 
       test("current menu item is correct", () => {
-        if (menuType === "DisclosureMenu") {
+        if (menuType === "Bootstrap4DisclosureMenu") {
           expect(submenu.currentMenuItem).toBeNil();
         } else {
           expect(submenu.currentMenuItem).toBe(submenu.elements.menuItems[0]);

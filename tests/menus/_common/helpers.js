@@ -118,7 +118,7 @@ export function toggleIsOpen(toggle) {
 
   // Container expectations.
   expect(toggle.dom.container.classList.contains("show")).toBeTrue();
-  expect(toggle.dom.container.classList.contains("collapse")).ToBeTrue();
+  expect(toggle.dom.container.classList.contains("collapse")).toBeTrue();
 
   // Parent menu expectations.
   if (parentMenu) {
@@ -143,7 +143,7 @@ export function toggleIsPreviewed(toggle) {
 
   // Container expectations.
   expect(toggle.dom.container.classList.contains("show")).toBeTrue();
-  expect(toggle.dom.container.classList.contains("collapse")).ToBeTrue();
+  expect(toggle.dom.container.classList.contains("collapse")).toBeTrue();
 
   // Parent menu expectations.
   if (parentMenu) {
@@ -168,7 +168,7 @@ export function toggleIsClosed(toggle) {
 
   // Container expectations.
   expect(toggle.dom.container.classList.contains("show")).toBeFalse();
-  expect(toggle.dom.container.classList.contains("collapse")).ToBeTrue();
+  expect(toggle.dom.container.classList.contains("collapse")).toBeTrue();
 
   // Parent menu expectations.
   if (parentMenu) {

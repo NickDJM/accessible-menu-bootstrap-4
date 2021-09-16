@@ -20,7 +20,6 @@ export function aria(MenuClass) {
     document.body.innerHTML = twoLevelMenu;
     const menu = new MenuClass({
       menuElement: document.querySelector("#menu-0"),
-      submenuItemSelector: "li.dropdown",
       containerElement: document.querySelector("nav"),
       controllerElement: document.querySelector("#toggle-0"),
     });
@@ -36,7 +35,7 @@ export function aria(MenuClass) {
       expect(menu.dom.menu.getAttribute("aria-labelledby")).toBe("toggle-0");
 
       if (menuType === "Bootstrap4Menubar") {
-        expect(menu.dom.menu.getAttribute("role")).toBe("Bootstrap4Menubar");
+        expect(menu.dom.menu.getAttribute("role")).toBe("menubar");
       } else if (menuType === "Bootstrap4Treeview") {
         expect(menu.dom.menu.getAttribute("role")).toBe("tree");
       }
@@ -80,7 +79,7 @@ export function aria(MenuClass) {
         );
 
         if (menuType === "Bootstrap4Menubar") {
-          expect(submenuElement.getAttribute("role")).toBe("Bootstrap4Menubar");
+          expect(submenuElement.getAttribute("role")).toBe("menubar");
         } else if (menuType === "Bootstrap4Treeview") {
           expect(submenuElement.getAttribute("role")).toBe("group");
         }
