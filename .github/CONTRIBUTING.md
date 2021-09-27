@@ -1,4 +1,4 @@
-# Contributing to accessible-menu
+# Contributing to accessible-menu-bootstrap-4
 
 Whether you want to add a feature or simply report a bug or issue, please have a quick read through these guidelines before contributing.
 
