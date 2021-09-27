@@ -6,6 +6,8 @@
 
 A JavaScript library to help you generate WAI-ARIA accessible menus with in the DOM using Bootstrap 4.
 
+This project is an extension of [accessible-menu](https://github.com/NickDJM/accessible-menu) to allow out-of-the-box for Bootstrap 4 compatibility.
+
 The supported menu types are:
 
 - [Disclosure Navigation Menus](https://www.w3.org/TR/wai-aria-practices-1.2/examples/disclosure/disclosure-navigation.html)
@@ -42,14 +44,132 @@ For learning/prototyping purposes you can use the latest version with:
 For production environments, it is recommend to use a specific version to avoid unforseen breaking changes:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/accessible-menu@1.0.0/dist/accessible-menu-bs4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/accessible-menu-bootstrap-4@1.0.0/dist/accessible-menu-bs4.min.js"></script>
 ```
 
 ## Usage
 
-[Basic usage coming soon!]
+To use **accessible-menu-bootstrap-4**, you first need to make sure your menu matches the following structure:
 
-For more indepth usage/api docs, you can check out the main [accessible-menu](https://github.com/NickDJM/accessible-menu) project.
+```html
+<ul id="example-menu" class="navbar-nav">
+  <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+  <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle">Projects ▼</a>
+    <ul class="dropdown-menu">
+      <li class="nav-item"><a href="/projects/awesome" class="dropdown-item">Awesome project</a></li>
+      <li class="nav-item"><a href="/projects/not-so-awesome" class="dropdown-item">Not-so-awesome project</a></li>
+    </ul>
+  </li>
+  <li class="nav-item"><a href="/contact" class="nav-link">Contact me</a></li>
+</ul>
+```
+
+Include **accessible-menu-bootstrap-4** through import or bundled library in your project:
+
+```js
+import AccessibleMenu from "accessible-menu-bootstrap-4";
+```
+
+or
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/accessible-menu-bootstrap-4@1.0.0/dist/accessible-menu-bs4.min.js"></script>
+```
+
+Once you have **accessible-menu-bootstrap-4** loaded, declare a new menu object.
+
+`menuElement` is required for all menus. Unlike accessible-menu, **accessible-menu-bootstrap-4** will automatically find dropdown menus since the classes `.dropdown`, `.dropdown-menu`, and `.dropdown-item` are included in the Bootstrap 4 framework.
+
+```js
+const menu = new AccessibleMenu.DisclosureMenu({
+  menuElement: document.querySelector("#example-menu"),
+});
+```
+
+### Only need one type of menu class?
+
+Bundled versions of each menu are provided in the dist and individual exports are provided in the index.
+
+There are also compiled ES Module versions if you don't want to use an iife!
+
+#### Bootstrap4DisclosureMenu usage
+
+```js
+import { Bootstrap4DisclosureMenu } from "accessible-menu-bootstrap-4";
+```
+
+or
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/accessible-menu-bootstrap-4@1.0.0/dist/disclosure-menu-bs4.min.js"></script>
+```
+
+then
+
+```js
+const menu = new Bootstrap4DisclosureMenu({
+  menuElement: document.querySelector("#example-menu"),
+});
+```
+
+#### Bootstrap4Menubar usage
+
+```js
+import { Bootstrap4Menubar } from "accessible-menu-bootstrap-4";
+```
+
+or
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/accessible-menu-bootstrap-4@1.0.0/dist/menubar-bs4.min.js"></script>
+```
+
+then
+
+```js
+const menu = new Bootstrap4Menubar({
+  menuElement: document.querySelector("#example-menu"),
+});
+```
+
+#### Bootstrap4Treeview usage
+
+```js
+import { Bootstrap4Treeview } from "accessible-menu-bootstrap-4";
+```
+
+or
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/accessible-menu-bootstrap-4@1.0.0/dist/treeview-bs4.min.js"></script>
+```
+
+then
+
+```js
+const menu = new Bootstrap4Treeview({
+  menuElement: document.querySelector("#example-menu"),
+});
+```
+
+### Documentation
+
+- [accessible-menu API Documentation](https://accessible-menu.netlify.app/)
+- Basics
+  - [Single-level menu](docs/basics/single-level-menu.md)
+  - [Single-level menu with toggle](docs/basics/single-level-menu-with-toggle.md)
+  - [Two-level menu with toggle](docs/basics/two-level-menu-with-toggle.md)
+
+### Conflict with Bootstrap's own navbar toggle
+
+Bootstrap 4 has it's own implementation of expanding/collapsing menus using the `data-toggle` attribute on navbar togglers and dropdown toggles which would cause both **accessible-menu-bootstrap-4** _and_ Bootstrap's own toggler to open/close menus at the same time. To resolve this issue, **accessible-menu-bootstrap-4** removed the `data-toggle` attributes from menu toggles that it controls.
+
+### Other versions of Bootstrap
+
+This project isn't designed to work with other versions of Bootstrap other than v4, however you _could_ probably get it to work with Bootstrap 3 by customizing the selectors and open/close classes when declaring the menu.
+
+You also _might_ be able to get this to work with Bootstrap 5, however v5 changed the `data-toggle` value on dropdowns to `data-bs-toggle` which won't be handled by this project. A Bootstrap 5 specific project may be created if there is enough interest in it.
 
 ## Versioning
 
