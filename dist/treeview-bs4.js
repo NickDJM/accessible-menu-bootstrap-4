@@ -1830,5 +1830,5 @@ var Bootstrap4Treeview = (function () {
 
   return Bootstrap4Treeview;
 
-}());
+})();
 //# sourceMappingURL=treeview-bs4.js.map

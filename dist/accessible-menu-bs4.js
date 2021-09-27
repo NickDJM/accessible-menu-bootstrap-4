@@ -3099,5 +3099,5 @@ var AccessibleMenuBootstrap4 = (function () {
 
   return rollup;
 
-}());
+})();
 //# sourceMappingURL=accessible-menu-bs4.js.map

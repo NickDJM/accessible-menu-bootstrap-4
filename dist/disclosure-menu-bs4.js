@@ -1745,5 +1745,5 @@ var Bootstrap4DisclosureMenu = (function () {
 
   return Bootstrap4DisclosureMenu;
 
-}());
+})();
 //# sourceMappingURL=disclosure-menu-bs4.js.map

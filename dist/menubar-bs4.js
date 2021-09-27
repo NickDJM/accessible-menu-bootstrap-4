@@ -1898,5 +1898,5 @@ var Bootstrap4Menubar = (function () {
 
   return Bootstrap4Menubar;
 
-}());
+})();
 //# sourceMappingURL=menubar-bs4.js.map
