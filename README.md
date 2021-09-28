@@ -2,7 +2,8 @@
 
 [![Latest release](https://img.shields.io/npm/v/accessible-menu-bootstrap-4?label=RELEASE&style=for-the-badge)](https://www.npmjs.com/package/accessible-menu-bootstrap-4)
 [![License](https://img.shields.io/github/license/NickDJM/accessible-menu-bootstrap-4?style=for-the-badge)](/LICENSE)
-[![Build and tests](https://img.shields.io/github/workflow/status/nickdjm/accessible-menu-bootstrap-4/Tests/1.x?style=for-the-badge)](https://github.com/NickDJM/accessible-menu-bootstrap-4/actions)
+[![Jest tests](https://img.shields.io/github/workflow/status/nickdjm/accessible-menu-bootstrap-4/Tests/1.x?label=Tests&style=for-the-badge)](https://github.com/NickDJM/accessible-menu-bootstrap-4/actions/workflows/test.yml)
+[![GitHub CodeQL](https://img.shields.io/github/workflow/status/nickdjm/accessible-menu-bootstrap-4/CodeQL/1.x?label=CodeQL&style=for-the-badge)](https://github.com/NickDJM/accessible-menu-bootstrap-4/actions/workflows/codeql-analysis.yml)
 
 A JavaScript library to help you generate WAI-ARIA accessible menus with in the DOM using Bootstrap 4.
 
