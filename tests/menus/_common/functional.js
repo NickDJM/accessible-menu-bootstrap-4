@@ -7,8 +7,8 @@
 
 import { twoLevelMenu, fullMenu } from "./test-menus";
 import {
-  simulateClick,
-  simulateMouseEvent,
+  simulatePointer,
+  simulatePointerEvent,
   simulateKeypress,
   toggleIsOpen,
   toggleIsClosed,
@@ -112,7 +112,7 @@ export function clickTests(MenuClass) {
       controller.close();
 
       // Simulate the click.
-      simulateClick(controller.dom.toggle);
+      simulatePointer(controller.dom.toggle);
 
       // Toggle expectations.
       expect(controller.isOpen).toBeTrue();
@@ -142,7 +142,7 @@ export function clickTests(MenuClass) {
       controller.open();
 
       // Simulate the click.
-      simulateClick(controller.dom.toggle);
+      simulatePointer(controller.dom.toggle);
 
       toggleIsClosed(controller);
     });
@@ -165,7 +165,7 @@ export function clickTests(MenuClass) {
         controller.open();
 
         // Simulate the click.
-        simulateClick(document.querySelector("main"));
+        simulatePointer(document.querySelector("main"));
 
         toggleIsClosed(controller);
       });
@@ -180,7 +180,7 @@ export function clickTests(MenuClass) {
       const toggle = menu.elements.submenuToggles[0];
 
       // Simulate the click.
-      simulateClick(toggle.dom.toggle);
+      simulatePointer(toggle.dom.toggle);
 
       toggleIsPreviewed(toggle);
     });
@@ -198,7 +198,7 @@ export function clickTests(MenuClass) {
       toggle.open();
 
       // Simulate the click.
-      simulateClick(toggle.dom.toggle);
+      simulatePointer(toggle.dom.toggle);
 
       toggleIsClosed(toggle);
     });
@@ -225,7 +225,7 @@ export function hoverTests(MenuClass) {
       const toggle = menu.elements.submenuToggles[0];
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseenter", toggle.dom.toggle);
+      simulatePointerEvent("pointerenter", toggle.dom.toggle);
 
       toggleIsPreviewed(toggle);
     });
@@ -245,7 +245,7 @@ export function hoverTests(MenuClass) {
       toggle.open();
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseleave", menuItem.dom.item);
+      simulatePointerEvent("pointerleave", menuItem.dom.item);
 
       toggleIsClosed(toggle);
     });
@@ -266,7 +266,7 @@ export function hoverTests(MenuClass) {
       menu.elements.menuItems[0].dom.link.focus();
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseenter", toggle.dom.toggle);
+      simulatePointerEvent("pointerenter", toggle.dom.toggle);
 
       toggleIsClosed(toggle);
     });
@@ -286,7 +286,7 @@ export function hoverTests(MenuClass) {
       toggle.open();
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseleave", menuItem.dom.item);
+      simulatePointerEvent("pointerleave", menuItem.dom.item);
 
       toggleIsOpen(toggle);
     });
@@ -311,7 +311,7 @@ export function hoverTests(MenuClass) {
       originalToggle.open();
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseenter", newToggle.dom.toggle);
+      simulatePointerEvent("pointerenter", newToggle.dom.toggle);
 
       if (
         menuType === "Bootstrap4DisclosureMenu" ||
@@ -343,7 +343,7 @@ export function hoverTests(MenuClass) {
       toggle.open();
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseenter", submenuToggle.dom.toggle);
+      simulatePointerEvent("pointerenter", submenuToggle.dom.toggle);
 
       toggleIsPreviewed(submenuToggle);
     });
@@ -371,7 +371,7 @@ export function hoverTests(MenuClass) {
       submenuToggle.open();
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseleave", submenuItem.dom.item);
+      simulatePointerEvent("pointerleave", submenuItem.dom.item);
 
       toggleIsClosed(submenuToggle);
     });
@@ -403,6 +403,90 @@ export function baseKeypressTests(MenuClass) {
 
         toggleIsOpen(toggle);
         expect(menu.currentChild).toBe(0);
+      });
+
+      test("Activates 'clicks' root level menu item's link when not a submenu toggle", () => {
+        // Set up the DOM.
+        document.body.innerHTML = fullMenu;
+        const menu = new MenuClass({
+          menuElement: document.querySelector("#menu-0"),
+          submenuItemSelector: "li.dropdown",
+        });
+        const menuItem = menu.elements.menuItems[0];
+
+        // Set up the spy.
+        const spy = jest.spyOn(menuItem.dom.link, "click");
+
+        // Enter the menu.
+        menuItem.dom.link.focus();
+
+        // Simluate the keypress.
+        simulateKeypress(key, menuItem.dom.link);
+
+        expect(spy).toHaveBeenCalled();
+      });
+
+      test("Activates 'clicks' child level menu item's link when not a submenu toggle", () => {
+        // Set up the DOM.
+        document.body.innerHTML = fullMenu;
+        const menu = new MenuClass({
+          menuElement: document.querySelector("#menu-0"),
+          submenuItemSelector: "li.dropdown",
+        });
+        const toggle = menu.elements.submenuToggles[0];
+        const { controlledMenu } = toggle.elements;
+        const menuItem = controlledMenu.elements.menuItems[0];
+
+        // Enter the menu.
+        menu.elements.menuItems[0].dom.link.focus();
+
+        // Set up the menu for the test.
+        menu.focusChild(1);
+        toggle.open();
+        controlledMenu.focusChild(0);
+
+        // Set up the spy.
+        const spy = jest.spyOn(menuItem.dom.link, "click");
+
+        // Enter the menu.
+        menuItem.dom.link.focus();
+
+        // Simluate the keypress.
+        simulateKeypress(key, menuItem.dom.link);
+
+        expect(spy).toHaveBeenCalled();
+      });
+
+      test("Activates 'clicks' grandchild level menu item's link when not a submenu toggle", () => {
+        // Set up the DOM.
+        document.body.innerHTML = fullMenu;
+        const menu = new MenuClass({
+          menuElement: document.querySelector("#menu-0"),
+          submenuItemSelector: "li.dropdown",
+        });
+        const toggle = menu.elements.submenuToggles[0];
+        const { controlledMenu } = toggle.elements;
+        const submenuToggle = controlledMenu.elements.submenuToggles[1];
+        const subControlledMenu = submenuToggle.elements.controlledMenu;
+        const menuItem = subControlledMenu.elements.menuItems[0];
+
+        // Set up the spy.
+        const spy = jest.spyOn(menuItem.dom.link, "click");
+
+        // Enter the menu.
+        menu.elements.menuItems[0].dom.link.focus();
+
+        // Set up the menu for the test.
+        menu.focusChild(1);
+        toggle.open();
+        controlledMenu.focusChild(2);
+        submenuToggle.open();
+        subControlledMenu.focusChild(0);
+
+        // Simluate the keypress.
+        simulateKeypress(key, menuItem.dom.link);
+
+        expect(spy).toHaveBeenCalled();
       });
     });
   });
