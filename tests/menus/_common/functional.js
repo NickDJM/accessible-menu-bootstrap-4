@@ -7,8 +7,8 @@
 
 import { twoLevelMenu, fullMenu } from "./test-menus";
 import {
-  simulateClick,
-  simulateMouseEvent,
+  simulatePointer,
+  simulatePointerEvent,
   simulateKeypress,
   toggleIsOpen,
   toggleIsClosed,
@@ -112,7 +112,7 @@ export function clickTests(MenuClass) {
       controller.close();
 
       // Simulate the click.
-      simulateClick(controller.dom.toggle);
+      simulatePointer(controller.dom.toggle);
 
       // Toggle expectations.
       expect(controller.isOpen).toBeTrue();
@@ -142,7 +142,7 @@ export function clickTests(MenuClass) {
       controller.open();
 
       // Simulate the click.
-      simulateClick(controller.dom.toggle);
+      simulatePointer(controller.dom.toggle);
 
       toggleIsClosed(controller);
     });
@@ -165,7 +165,7 @@ export function clickTests(MenuClass) {
         controller.open();
 
         // Simulate the click.
-        simulateClick(document.querySelector("main"));
+        simulatePointer(document.querySelector("main"));
 
         toggleIsClosed(controller);
       });
@@ -180,7 +180,7 @@ export function clickTests(MenuClass) {
       const toggle = menu.elements.submenuToggles[0];
 
       // Simulate the click.
-      simulateClick(toggle.dom.toggle);
+      simulatePointer(toggle.dom.toggle);
 
       toggleIsPreviewed(toggle);
     });
@@ -198,7 +198,7 @@ export function clickTests(MenuClass) {
       toggle.open();
 
       // Simulate the click.
-      simulateClick(toggle.dom.toggle);
+      simulatePointer(toggle.dom.toggle);
 
       toggleIsClosed(toggle);
     });
@@ -225,7 +225,7 @@ export function hoverTests(MenuClass) {
       const toggle = menu.elements.submenuToggles[0];
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseenter", toggle.dom.toggle);
+      simulatePointerEvent("pointerenter", toggle.dom.toggle);
 
       toggleIsPreviewed(toggle);
     });
@@ -245,7 +245,7 @@ export function hoverTests(MenuClass) {
       toggle.open();
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseleave", menuItem.dom.item);
+      simulatePointerEvent("pointerleave", menuItem.dom.item);
 
       toggleIsClosed(toggle);
     });
@@ -266,7 +266,7 @@ export function hoverTests(MenuClass) {
       menu.elements.menuItems[0].dom.link.focus();
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseenter", toggle.dom.toggle);
+      simulatePointerEvent("pointerenter", toggle.dom.toggle);
 
       toggleIsClosed(toggle);
     });
@@ -286,7 +286,7 @@ export function hoverTests(MenuClass) {
       toggle.open();
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseleave", menuItem.dom.item);
+      simulatePointerEvent("pointerleave", menuItem.dom.item);
 
       toggleIsOpen(toggle);
     });
@@ -311,7 +311,7 @@ export function hoverTests(MenuClass) {
       originalToggle.open();
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseenter", newToggle.dom.toggle);
+      simulatePointerEvent("pointerenter", newToggle.dom.toggle);
 
       if (
         menuType === "Bootstrap4DisclosureMenu" ||
@@ -343,7 +343,7 @@ export function hoverTests(MenuClass) {
       toggle.open();
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseenter", submenuToggle.dom.toggle);
+      simulatePointerEvent("pointerenter", submenuToggle.dom.toggle);
 
       toggleIsPreviewed(submenuToggle);
     });
@@ -371,7 +371,7 @@ export function hoverTests(MenuClass) {
       submenuToggle.open();
 
       // Simulate the mouse.
-      simulateMouseEvent("mouseleave", submenuItem.dom.item);
+      simulatePointerEvent("pointerleave", submenuItem.dom.item);
 
       toggleIsClosed(submenuToggle);
     });

@@ -45,7 +45,7 @@
   },
   "homepage": "https://github.com/NickDJM/accessible-menu-bootstrap-4#readme",
   "dependencies": {
-    "accessible-menu": "^3.0.0"
+    "accessible-menu": "^3.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
@@ -68,7 +68,8 @@
     "eslint-plugin-standard": "^5.0.0",
     "husky": "^7.0.2",
     "jest": "^27.0.4",
-    "jest-extended": "^0.11.5",
+    "jest-environment-jsdom-latest": "^26.6.2",
+    "jest-extended": "^1.1.0",
     "jsdoc": "^3.6.7",
     "jsdoc-typeof-plugin": "^1.0.0",
     "lint-staged": "^11.1.2",

@@ -3,36 +3,30 @@
  */
 
 /**
- * Simulates a mouse event on a DOM element.
- *
- * @param {string}      eventType - The type of event to trigger.
- * @param {HTMLElement} element   - The element to trigger the event on.
- * @param {object}      options   - Custom options for the event.
+ * Extends jsdom MouseEvent class as PointerEvent class
+ * NOTE: It should be deprecated if JSDOM fully supports PointEvent in the future
  */
-export function simulateMouseEvent(eventType, element, options = {}) {
-  try {
-    const event = new MouseEvent(eventType, {
-      view: window,
-      bubbles: true,
-      cancelable: true,
-      ...options,
-    });
-    element.dispatchEvent(event);
-  } catch (error) {
-    console.error(error);
+class PointerEvent extends window.MouseEvent {
+  constructor(type, props) {
+    super(type, props);
+    if (props.button != null) {
+      this.button = props.button;
+    }
   }
 }
 
+window.PointerEvent = PointerEvent;
+
 /**
- * Simulates a touch event on a DOM element.
+ * Simulates a pointer event on a DOM element.
  *
  * @param {string}      eventType - The type of event to trigger.
  * @param {HTMLElement} element   - The element to trigger the event on.
  * @param {object}      options   - Custom options for the event.
  */
-export function simulateTouchEvent(eventType, element, options = {}) {
+export function simulatePointerEvent(eventType, element, options = {}) {
   try {
-    const event = new TouchEvent(eventType, {
+    const event = new PointerEvent(eventType, {
       view: window,
       bubbles: true,
       cancelable: true,
@@ -66,25 +60,14 @@ export function simulateKeyboardEvent(eventType, element, options = {}) {
 }
 
 /**
- * Simulates a mousedown and mouseup event on a DOM element.
+ * Simulates a pointerdown and pointerup event on a DOM element.
  *
  * @param {HTMLElement} element - The element to trigger the events on.
  * @param {object}      options - Custom options for the events.
  */
-export function simulateClick(element, options = {}) {
-  simulateMouseEvent("mousedown", element, options);
-  simulateMouseEvent("mouseup", element, options);
-}
-
-/**
- * Simulates a touchstart and touchend event on a DOM element.
- *
- * @param {HTMLElement} element - The element to trigger the events on.
- * @param {object}      options - Custom options for the events.
- */
-export function simulateTap(element, options = {}) {
-  simulateTouchEvent("touchstart", element, options);
-  simulateTouchEvent("touchend", element, options);
+export function simulatePointer(element, options = {}) {
+  simulatePointerEvent("pointerdown", element, options);
+  simulatePointerEvent("pointerup", element, options);
 }
 
 /**
