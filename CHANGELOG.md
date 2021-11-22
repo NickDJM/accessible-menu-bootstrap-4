@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.0...v1.0.1) (2021-11-22)
+
+
+### Documentation
+
+* **badges:** add CodeQL badge ([a85ba1a](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/a85ba1ac931ecddb0f2e8294d0ea0deb95aff5e5))
+* **security:** update security policy ([a1ac5ad](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/a1ac5ad64d33c822c324e81cf587c0d0284df12b))
+
+
+### Continuous Integration
+
+* add dependabot settings ([51d4f5c](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/51d4f5cb6583b7f7da8d31e4bff2990e1bc0b15a))
+* **tests:** add split out build and lint jobs ([f74a7e5](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/f74a7e5c959310afe92dd431f278bb56e64ba78a))
+
+
+### Build System
+
+* add github CodeQL workflow and security policy ([9d46003](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/9d4600361d1f0f960a0002e831f69ff39ea88be1))
+* bump @commitlint/cli from 13.2.1 to 15.0.0 ([70edc50](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/70edc50f08ea10865330bd0cad7c2e8137002cbd))
+* bump @commitlint/config-conventional from 13.2.0 to 15.0.0 ([2d8759f](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/2d8759f2e85f22ebbbec92c9a3b141dbedd7a8b2))
+* bump eslint-plugin-jsdoc from 36.1.1 to 37.0.3 ([61e4cfe](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/61e4cfe453f40d41f4fe34e4e8712fddd74593af))
+* bump lint-staged from 11.2.6 to 12.0.3 ([18470ea](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/18470ea7c2a189a3faea0100e3d3efa569250548))
+* **github:** add documentation issues template ([03466af](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/03466afb29b07fdb917468e9f08d1098695299d0))
+* **npm:** update lint scripts ([3a51024](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/3a51024396dfcdc399e374af68fb7778b2cb6248))
+
 ## [1.0.0](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.0-alpha.7...v1.0.0) (2021-09-27)
 
 
