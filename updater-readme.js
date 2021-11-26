@@ -13,8 +13,8 @@
 module.exports.readVersion = (contents) => {
   try {
     const version = contents
-      .match(/\/accessible-menu@\d+\.\d+\.\d+(-.*?\.\d+)?\//)[0]
-      .replace("accessible-menu@", "");
+      .match(/\/accessible-menu-bootstrap-4@\d+\.\d+\.\d+(-.*?\.\d+)?\//)[0]
+      .replace("accessible-menu-bootstrap-4@", "");
 
     return version;
   } catch (error) {
@@ -31,7 +31,7 @@ module.exports.readVersion = (contents) => {
  */
 module.exports.writeVersion = (contents, version) => {
   return contents.replace(
-    /\/accessible-menu@\d+\.\d+\.\d+(-.*?\.\d+)?\//g,
-    `/accessible-menu@${version}/`
+    /\/accessible-menu-bootstrap-4@\d+\.\d+\.\d+(-.*?\.\d+)?\//g,
+    `/accessible-menu-bootstrap-4@${version}/`
   );
 };
