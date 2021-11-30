@@ -34,7 +34,7 @@ Given the above structure, the parameters needed for an accessible menu are:
 Depending on what kind of menu you'd like to create you can use [DisclosureMenu](https://accessible-menu.netlify.app/disclosuremenu), [Menubar](https://accessible-menu.netlify.app/menubar), or [Treeview](https://accessible-menu.netlify.app/treeview).
 
 ```js
-const menu = new AccessibleMenu.DisclosureMenu({
+const menu = new AccessibleMenu.Bootstrap4DisclosureMenu({
   menuElement: document.querySelector("#main-menu"),
   controllerElement: document.querySelector("#main-menu-toggle"),
   containerElement: document.querySelector("#main-nav"),
