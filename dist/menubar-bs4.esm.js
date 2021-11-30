@@ -982,7 +982,10 @@ var BaseMenu = function () {
     value: function _handleHover() {
       var _this5 = this;
       this.elements.menuItems.forEach(function (menuItem, index) {
-        menuItem.dom.link.addEventListener("pointerenter", function () {
+        menuItem.dom.link.addEventListener("pointerenter", function (event) {
+          if (event.pointerType === "pen" || event.pointerType === "touch") {
+            return;
+          }
           if (_this5.hoverType === "on") {
             _this5.currentEvent = "mouse";
             _this5.currentChild = index;
@@ -1005,7 +1008,10 @@ var BaseMenu = function () {
           }
         });
         if (menuItem.isSubmenuItem) {
-          menuItem.dom.item.addEventListener("pointerleave", function () {
+          menuItem.dom.item.addEventListener("pointerleave", function (event) {
+            if (event.pointerType === "pen" || event.pointerType === "touch") {
+              return;
+            }
             if (_this5.hoverType === "on") {
               if (_this5.hoverDelay > 0) {
                 setTimeout(function () {

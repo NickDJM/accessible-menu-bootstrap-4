@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.1...v1.0.2) (2021-11-30)
+
+
+### Build System
+
+* **npm:** bump minimum accessible-menu version to 3.0.4 to resolve hover bug ([0aa85b7](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/0aa85b7dae0f2a4900de1d35b866f54df3229897))
+* **npm:** remove deprecated dependency eslint-plugin-standard ([76405ed](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/76405eda2e3a97d8f3fccabdad7b7e171b9ac67c))
+* **versioning:** automatically update CDN version links in README on release ([08bd6d4](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/08bd6d45465e75d44a58425719ffdc4eb3784360))
+
+
+### Documentation
+
+* **examples:** update to use proper menu classes ([dde6278](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/dde6278698574ba035916a045359dc92fdd27c0a))
+
 ### [1.0.1](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.0...v1.0.1) (2021-11-22)
 
 
