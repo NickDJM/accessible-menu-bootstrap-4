@@ -161,7 +161,6 @@ const menu = new Bootstrap4Treeview({
   - [Single-level menu](docs/basics/single-level-menu.md)
   - [Single-level menu with toggle](docs/basics/single-level-menu-with-toggle.md)
   - [Two-level menu with toggle](docs/basics/two-level-menu-with-toggle.md)
-- [Live examples](https://mandrasch.github.io/accessible-menu-bootstrap-examples/)
 
 ### Conflict with Bootstrap's own navbar toggle
 
