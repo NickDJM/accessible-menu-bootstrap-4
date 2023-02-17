@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.2...v1.0.3) (2023-02-17)
+
+
+### Bug Fixes
+
+* **tests:** add jest-jsdom-environment to project ([73299fe](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/73299fe49abf8052db260eb08fca8250904f5fed))
+
+
+### Build System
+
+* bump @commitlint/cli from 15.0.0 to 16.0.1 ([fa10b33](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/fa10b33c25c2b77452f4d85f4ca3774cd2b80ff9))
+* bump @commitlint/cli from 16.3.0 to 17.0.0 ([1b931d5](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/1b931d5b218a5aa5100d1f0cb7bf229bc4a1fb74))
+* bump @commitlint/config-conventional from 15.0.0 to 16.0.0 ([1930ddf](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/1930ddf507a0049527030638eb83ab25826a90d8))
+* bump @commitlint/config-conventional from 16.2.4 to 17.0.0 ([c2a82c0](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/c2a82c05093dd09eea134a0fa06665f7e92176cb))
+* bump @rollup/plugin-babel from 5.3.1 to 6.0.0 ([bde118a](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/bde118aeb4238c9a8555d8d8f02c5ce3941d0d9d))
+* bump @rollup/plugin-node-resolve from 13.3.0 to 14.0.0 ([cf66952](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/cf669524197ff3a2c3b2f06f3c809107878e59b4))
+* bump @rollup/plugin-node-resolve from 14.1.0 to 15.0.0 ([bd8a8a7](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/bd8a8a77591a63a7c3ee8c60e7d74522d4ddc780))
+* bump eslint-plugin-jsdoc from 37.9.7 to 38.0.3 ([0c1daa6](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/0c1daa67e0cc5b68a87eee4d0859ec13198c7955))
+* bump eslint-plugin-jsdoc from 38.1.6 to 39.1.0 ([b387a62](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/b387a622a308ec32deb9c8b8040f86e5af0d0e08))
+* bump eslint-plugin-jsdoc from 39.9.1 to 40.0.0 ([8576cd2](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/8576cd2fcd37362b4877359e24faac3263266ce0))
+* bump husky from 7.0.4 to 8.0.1 ([9a3f390](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/9a3f3904edfa5ecfe45e8cac1e44af6254489477))
+* bump jest from 27.5.1 to 28.0.2 ([be40302](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/be4030254791b16c6af8a988ecb3baeacc663679))
+* bump jest from 28.1.3 to 29.0.1 ([3e92b31](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/3e92b31e5711dbb772efb1d979e0aae17a51e2b2))
+* bump jest-environment-jsdom from 28.1.3 to 29.0.1 ([8e7badf](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/8e7badf8dcd8bcaad663a3e257fb86a25a193ac5))
+* bump jest-extended from 1.2.1 to 2.0.0 ([7626c15](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/7626c1504995df9a6ebfc958b8959a4d554c8060))
+* bump jest-extended from 2.1.0 to 3.0.0 ([747efff](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/747efff782e1c2c2cc118a2215a5676ef6dc9a53))
+* bump jsdoc from 3.6.11 to 4.0.0 ([d737900](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/d737900694f2972475319be5aa44558d581135fb))
+* bump lint-staged from 12.5.0 to 13.0.1 ([0115dc1](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/0115dc107399d8ddc13f964069d71779df03a80d))
+
+
+### Documentation
+
+* **badges:** fix shields.io badges for tests ([7be7d28](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/7be7d28de738b51fd00fdfc60c2cce8e26cfe9c1)), closes [#44](https://github.com/NickDJM/accessible-menu-bootstrap-4/issues/44)
+* **examples:** add live examples provided by mandrasch ([1ae1e44](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/1ae1e442c9a4c3b667bdbcdc4050bdc8155f8b34))
+* **examples:** correct examples to use proper Bootstrap 4 setup ([e40106f](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/e40106f0849521581dbc10f16c06b9d6df6736a6))
+* remove live examples because they only support BS5 now ([5aca6c1](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/5aca6c160c2cd0fcef9ef812b60058f473af004c)), closes [#24](https://github.com/NickDJM/accessible-menu-bootstrap-4/issues/24)
+* **sponsor:** add coldfront labs as sponsor ([2031db0](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/2031db0e79f297e0a0feb65f24f04270a86f8d64)), closes [#45](https://github.com/NickDJM/accessible-menu-bootstrap-4/issues/45)
+* update links to support menus to point to apg ([1714ca7](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/1714ca7f68d442aacaf64147dfad1abba92c2f0f)), closes [#46](https://github.com/NickDJM/accessible-menu-bootstrap-4/issues/46)
+
 ### [1.0.2](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.1...v1.0.2) (2021-11-30)
 
 
