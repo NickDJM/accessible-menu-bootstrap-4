@@ -1,4 +1,5 @@
-/* eslint-disable jsdoc/no-undefined-types */
+// eslint-disable-next-line no-unused-vars
+/* global Bootstrap4Treeview Bootstrap4TreeviewToggle */
 
 import TreeviewItem from "accessible-menu/src/treeviewItem.js";
 

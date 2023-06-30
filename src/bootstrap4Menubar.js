@@ -12,14 +12,16 @@ class Bootstrap4Menubar extends Menubar {
    * The class to use when generating submenus.
    *
    * @type {typeof Bootstrap4Menubar}
+   *
    * @public
    */
-  _MenuType = Bootstrap4Menubar;
+  _MenuType = Bootstrap4Menubar; // eslint-disable-line no-use-before-define
 
   /**
    * The class to use when generating menu items.
    *
    * @type {typeof Bootstrap4MenubarItem}
+   *
    * @public
    */
   _MenuItemType = Bootstrap4MenubarItem;
@@ -28,6 +30,7 @@ class Bootstrap4Menubar extends Menubar {
    * The class to use when generating submenu toggles.
    *
    * @type {typeof Bootstrap4MenubarToggle}
+   *
    * @public
    */
   _MenuToggleType = Bootstrap4MenubarToggle;

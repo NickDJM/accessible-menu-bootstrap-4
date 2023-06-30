@@ -12,14 +12,16 @@ class Bootstrap4Treeview extends Treeview {
    * The class to use when generating submenus.
    *
    * @type {typeof Bootstrap4Treeview}
+   *
    * @public
    */
-  _MenuType = Bootstrap4Treeview;
+  _MenuType = Bootstrap4Treeview; // eslint-disable-line no-use-before-define
 
   /**
    * The class to use when generating menu items.
    *
    * @type {typeof Bootstrap4TreeviewItem}
+   *
    * @public
    */
   _MenuItemType = Bootstrap4TreeviewItem;
@@ -28,6 +30,7 @@ class Bootstrap4Treeview extends Treeview {
    * The class to use when generating submenu toggles.
    *
    * @type {typeof Bootstrap4TreeviewToggle}
+   *
    * @public
    */
   _MenuToggleType = Bootstrap4TreeviewToggle;

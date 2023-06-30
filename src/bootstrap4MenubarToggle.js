@@ -1,4 +1,5 @@
-/* eslint-disable jsdoc/no-undefined-types */
+// eslint-disable-next-line no-unused-vars
+/* global Bootstrap4Menubar */
 
 import MenubarToggle from "accessible-menu/src/menubarToggle.js";
 
@@ -9,7 +10,8 @@ class Bootstrap4MenubarToggle extends MenubarToggle {
   /**
    * The DOM elements within the menu toggle.
    *
-   * @type {object.<HTMLElement>}
+   * @type {Object<HTMLElement>}
+   *
    * @property {HTMLElement} toggle    - The menu toggle.
    * @property {HTMLElement} parent    - The menu containing this toggle.
    * @property {HTMLElement} container - The element that controlls the visibility of the child menu.
