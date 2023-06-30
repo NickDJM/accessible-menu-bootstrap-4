@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.4](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.3...v1.0.4) (2023-06-30)
+
+
+### Continuous Integration
+
+* **codeql:** upgrade to v2 ([463bfa3](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/463bfa398ba1ed125312f4bc699e4a021f5ce0b7)), closes [#56](https://github.com/NickDJM/accessible-menu-bootstrap-4/issues/56)
+
+
+### Build System
+
+* bump eslint-plugin-jsdoc from 40.3.0 to 43.0.0 ([9d77f09](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/9d77f098502fe814c5635b1add8b6e50c3254e1b))
+* bump eslint-plugin-jsdoc from 43.2.0 to 44.2.4 ([fa5e7b2](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/fa5e7b2f453bc27b82a82d0a1e3fb88d136d91db))
+* bump eslint-plugin-jsdoc from 44.2.7 to 46.2.6 ([e1f6b50](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/e1f6b504f0223e6d11298bc34765fa55e64699e0))
+* bump jest-extended from 3.2.4 to 4.0.0 ([51a1375](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/51a13754bd17dbfd3824f706083d6bfc1d68e062))
+* **npm:** require at least accessible-menu v3.0.7 ([5e13166](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/5e13166182f1e70518a2f8418682828dce17d127))
+* **npm:** update all dependencies to latest ([4394ff8](https://github.com/NickDJM/accessible-menu-bootstrap-4/commit/4394ff8bdb55264acb9a9e035f78d4cd43c6dfa0))
+
 ### [1.0.3](https://github.com/NickDJM/accessible-menu-bootstrap-4/compare/v1.0.2...v1.0.3) (2023-02-17)
 
 
